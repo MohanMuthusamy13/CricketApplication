@@ -5,8 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("Players")
-@Getter
-@Setter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,10 +29,28 @@ public class Player {
 
     private String baseAbility;
 
+    private int matchesPlayed;
+
+    private int halfCenturies;
+
+    private int centuries;
+
     @ToString.Exclude
     private String activeStatus = "inactive";
 
     private String teamName;
+
+    public void setMatchesPlayed(int matchesPlayed) {
+        this.matchesPlayed += matchesPlayed;
+    }
+
+    public void setCenturies(int centuries) {
+        this.centuries += centuries;
+    }
+
+    public void setHalfCenturies(int halfCenturies) {
+        this.halfCenturies += halfCenturies;
+    }
 
     public void setScore(int score) {
         this.score += score;

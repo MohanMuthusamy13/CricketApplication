@@ -10,4 +10,7 @@ public interface PlayerService {
     List<Player> getPlayersWithBaseAbility(String baseAbility);
     Player findByName(String name) throws Exception;
     Player savePlayer(Player player);
+    Player updatePlayer(long id, Player player);
+    Player getOverAllMaxScorer();
+    Player getOverallMaxWicketTaker();
 }

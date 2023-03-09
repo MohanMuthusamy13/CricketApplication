@@ -12,11 +12,13 @@ import com.example.CricketApplication.CricketGameSimulator.service.repositoriesS
 import com.example.CricketApplication.CricketGameSimulator.service.services.MatchRecordStatusService;
 import com.example.CricketApplication.CricketGameSimulator.service.services.overservice.OverService;
 import com.example.CricketApplication.CricketGameSimulator.service.services.matchformatservice.MatchFormatService;
+import com.example.CricketApplication.CricketGameSimulator.service.services.playerservice.PlayerStatsRecorder;
 import com.example.CricketApplication.CricketGameSimulator.service.services.playerservice.PlayersService;
 import com.example.CricketApplication.CricketGameSimulator.service.services.illegalballservice.IllegalBallTrackerService;
 import com.example.CricketApplication.CricketGameSimulator.service.services.resetgameservice.ResetGameService;
 import com.example.CricketApplication.CricketGameSimulator.service.services.runservice.RunsGenerator;
 import com.example.CricketApplication.CricketGameSimulator.entities.builders.TeamBuilder;
+import com.example.CricketApplication.CricketGameSimulator.service.services.scoreservice.PlayerCenturyAndHalfCenturyService;
 import com.example.CricketApplication.CricketGameSimulator.service.services.scoreservice.ScoreModel;
 import com.example.CricketApplication.CricketGameSimulator.service.services.teamservices.TeamSelectorService;
 import com.example.CricketApplication.CricketGameSimulator.service.services.tossservice.TossService;
@@ -114,6 +116,8 @@ public class GameServiceImpl implements GameService {
 
     @Autowired
     MatchRecordStatusService statusService;
+    @Autowired
+    PlayerStatsRecorder playerStatsRecorder;
 
     @Autowired
     TeamBuilder teamCreationService;
@@ -257,7 +261,6 @@ public class GameServiceImpl implements GameService {
             }
         }
         scoreBoardDisplay.showStatusPerBall();
-
         saveScoreRecord();
 
     }
@@ -298,12 +301,13 @@ public class GameServiceImpl implements GameService {
                 startBattingAndBowling();
             }
         }
+
         matchTeams.setTeamsPlayed(getTeams());
         matchTeams.setMatchFormat(getPlannedMatchFormat());
+        PlayerCenturyAndHalfCenturyService.centuryStatsProvider(playingTeamsPlayers);
         matchRepositoryService.updateMatch(matchId, matchTeams);
-
         statusService.saveMatchStatusRecord(matchId);
-
+        playerStatsRecorder.savePlayerStats(playingTeamsPlayers);
         ResetGameService.resetGame();
         return "Match has Completed";
     }

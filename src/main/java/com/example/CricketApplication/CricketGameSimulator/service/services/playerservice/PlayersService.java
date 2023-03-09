@@ -3,6 +3,7 @@ package com.example.CricketApplication.CricketGameSimulator.service.services.pla
 
 import com.example.CricketApplication.CricketGameSimulator.entities.Player;
 import com.example.CricketApplication.CricketGameSimulator.entities.builders.PlayerBuilder;
+import com.example.CricketApplication.CricketGameSimulator.service.services.majorgameservice.GameServiceImpl;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,4 +46,14 @@ public class PlayersService {
         return playerTeam;
     }
 
+    public static void checkForCenturiesAndHalfCenturies(Player player) {
+        if (player.getScore() >= 100) {
+            player.setCenturies(1);
+            return;
+        }
+
+        if (player.getScore() >= 50) {
+            player.setHalfCenturies(1);
+        }
+    }
 }

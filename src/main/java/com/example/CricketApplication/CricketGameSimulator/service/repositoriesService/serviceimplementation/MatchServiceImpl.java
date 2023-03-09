@@ -1,6 +1,8 @@
 package com.example.CricketApplication.CricketGameSimulator.service.repositoriesService.serviceimplementation;
 
 import com.example.CricketApplication.CricketGameSimulator.entities.Match;
+import com.example.CricketApplication.CricketGameSimulator.entities.Player;
+import com.example.CricketApplication.CricketGameSimulator.entities.PlayerStatsStructure;
 import com.example.CricketApplication.CricketGameSimulator.exceptionHandler.NotFoundException;
 import com.example.CricketApplication.CricketGameSimulator.repositories.MatchRepository;
 import com.example.CricketApplication.CricketGameSimulator.service.repositoriesService.serviceinterfaces.MatchService;
@@ -54,5 +56,13 @@ public class MatchServiceImpl implements MatchService {
         match.setTeamsPlayed(updatedMatch.getTeamsPlayed());
         match.setMatchStatus(updatedMatch.getMatchStatus());
         return matchRepository.save(match);
+    }
+
+    public PlayerStatsStructure getMaxScorerIdByMatch(long matchId) {
+        return matchRepository.getMaxScorerIdByMatch(matchId);
+    }
+
+    public PlayerStatsStructure getWicketTakerIdByMatch(long matchId) {
+        return matchRepository.getMaxWicketTakerIdByMatch(matchId);
     }
 }

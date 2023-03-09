@@ -14,6 +14,7 @@ public class PlayerBuilder {
     private int ballsFaced;
     private int ballsBowled;
     private int wicketsTaken;
+    private int matchesPlayed;
     private String baseAbility;
     private String teamName;
     private Team team;
@@ -38,6 +39,11 @@ public class PlayerBuilder {
 
     public PlayerBuilder setBallsBowled(int ballsBowled) {
         this.ballsBowled = ballsBowled;
+        return this;
+    }
+
+    public PlayerBuilder setMatchesPlayed(int matchesPlayed) {
+        this.matchesPlayed = matchesPlayed;
         return this;
     }
 

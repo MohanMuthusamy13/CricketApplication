@@ -24,7 +24,7 @@ public class PlayerFactory {
         Player player = new Player(
                 sequenceGeneratorService.getSequenceNumber(Player.SEQUENCE_NAME),
                 name, 0, 0, 0,
-                0, "Batsman",
+                0,"Batsman", 0, 0, 0,
                 "inactive",teamName);
         playerRepositoryService.savePlayer(player);
         return player;
@@ -35,7 +35,7 @@ public class PlayerFactory {
         Player player = new Player(
                 sequenceGeneratorService.getSequenceNumber(Player.SEQUENCE_NAME),
                 name, 0, 0, 0,
-                0, "Bowler",
+                0, "Bowler", 0, 0, 0,
                 "inactive",teamName);
         playerRepositoryService.savePlayer(player);
         return player;
