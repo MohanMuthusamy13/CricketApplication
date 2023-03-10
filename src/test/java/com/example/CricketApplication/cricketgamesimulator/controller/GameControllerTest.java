@@ -40,7 +40,7 @@ class GameControllerTest {
 
     @Test
     void startMatch() throws Exception {
-        Mockito.when(cricket.matchFormatScheduler(matchFormat)).thenReturn(matchFormat.toUpperCase());
+        Mockito.when(cricket.  matchFormatScheduler(matchFormat)).thenReturn(matchFormat.toUpperCase());
         Mockito.when(cricket.startGame(matchId)).thenReturn("Match has Completed");
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders

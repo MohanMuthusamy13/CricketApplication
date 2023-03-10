@@ -1,26 +1,13 @@
 package com.example.CricketApplication.cricketgamesimulator.service.services.majorgameservice;
 
 import com.example.CricketApplication.cricketgamesimulator.entities.*;
-import com.example.CricketApplication.cricketgamesimulator.entities.builders.PlayerBuilder;
-import com.example.CricketApplication.cricketgamesimulator.entities.builders.ScoreRecordBuilder;
 import com.example.CricketApplication.cricketgamesimulator.repositories.TeamRepository;
-import com.example.CricketApplication.cricketgamesimulator.service.auxillaryservices.SequenceGeneratorService;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation.MatchServiceImpl;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation.ScoreRecorderServiceImpl;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation.TeamServiceImpl;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceinterfaces.MatchStatusService;
-import com.example.CricketApplication.cricketgamesimulator.service.services.MatchRecordStatusService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.overservice.OverService;
-import com.example.CricketApplication.cricketgamesimulator.service.services.matchformatservice.MatchFormatService;
-import com.example.CricketApplication.cricketgamesimulator.service.services.playerservice.PlayerStatsRecorder;
-import com.example.CricketApplication.cricketgamesimulator.service.services.playerservice.PlayersService;
+import com.example.CricketApplication.cricketgamesimulator.service.services.playerservice.AuxiliaryPlayerService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.illegalballservice.IllegalBallTrackerService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.resetgameservice.ResetGameService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.runservice.RunsGenerator;
-import com.example.CricketApplication.cricketgamesimulator.entities.builders.TeamBuilder;
-import com.example.CricketApplication.cricketgamesimulator.service.services.scoreservice.PlayerCenturyAndHalfCenturyService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.scoreservice.ScoreModel;
-import com.example.CricketApplication.cricketgamesimulator.service.services.teamservices.TeamSelectorService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.tossservice.TossService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.windeclarativeservices.WicketStatusProvider;
 import com.example.CricketApplication.cricketgamesimulator.service.services.windeclarativeservices.WinningStatusProvider;
@@ -37,106 +24,49 @@ import java.util.*;
 @Component
 public class GameServiceImpl implements GameService {
 
-    @Getter
+    @Getter @Setter
     private static List playingTeamsPlayers;
-
-    @Getter
+    @Getter @Setter
     private static List playingTeams;
-
-    private static List scoreRecords = new ArrayList<>();
-
     private static int currentBatter;
-
     private static int currentBowler = 7;
-
     @Getter @Setter
     private static int[] scoreTeams = new int[2];
-
     @Getter @Setter
     private static int Innings;
-
     @Getter @Setter
     private static int Batting;
-
     @Setter
     private static int Bowling;
-
     @Getter @Setter
     private static int totalOvers;
-
     @Setter
     private static boolean legalBallFlag = false;
-
     private static String matchFormat;
-
     @Getter @Setter
     private static String flagForTeamWinningIndicationOnSecondInnings = "";
-
     @Setter
     private static int wickets;
-
+    @Getter @Setter
     private static long tempMatchId;
-
     @Getter @Setter
     private static int runsScorePerBall;
-    @Getter
-    private static String plannedMatchFormat;
-
-    private static Map<Long, Integer> scoreUtilityMap;
-
-    @Autowired
-    private MatchStatusService matchStatusService;
-
-    @Autowired
-    private SequenceGeneratorService sequenceGeneratorService;
-
-    static Scanner sc = new Scanner(System.in);
-
-    private Team team1;
-    private Team team2;
-
-    @Getter
+    @Getter @Setter
     private static List<Team> teams = new ArrayList<>();
-
+    @Getter @Setter
     private static Match matchTeams;
+    private final TeamRepository teamRepository;
+
 
     @Autowired
-    ScoreModel score;
+    AuxiliaryPlayerService auxiliaryPlayerService;
     @Autowired
     WicketStatusProvider wicketTracker;
     @Autowired
     ScoreBoardDisplay scoreBoardDisplay;
     @Autowired
     RunsGenerator runsGenerator;
-    @Autowired
-    PlayersService playersTeamService;
-    @Autowired
-    TeamSelectorService teamSelectorService;
     WinningStatusProvider checkWinning = new WinningStatusProvider();
-
-    @Autowired
-    MatchRecordStatusService statusService;
-    @Autowired
-    PlayerStatsRecorder playerStatsRecorder;
-
-    @Autowired
-    TeamBuilder teamCreationService;
-    @Autowired
-    TeamServiceImpl teamRepositoryService;
-    @Autowired
-    ScoreRecorderServiceImpl scoreRecorderRepositoryService;
-    @Autowired
-    MatchServiceImpl matchRepositoryService;
-
-    @Autowired
-    ScoreBuilder scoreBuilder;
-    private final TeamRepository teamRepository;
-
-    @Autowired
-    ScoreRecordBuilder scoreRecordBuilder;
-
-    PlayerBuilder playerBuilder = new PlayerBuilder();
-
 
     public GameServiceImpl(TeamRepository teamRepository) {
         gameServiceProvider();
@@ -156,11 +86,6 @@ public class GameServiceImpl implements GameService {
 
     public static Player getBowlingPlayer() {
         return ((ArrayList<Player>) playingTeamsPlayers.get(Math.abs(1 - Batting))).get(currentBowler);
-    }
-
-
-    public void wicketTrackerFunc() {
-        wicketTracker.gotWicket();
     }
 
     public static void setCurrentBatter(int currentBatter) {
@@ -186,63 +111,39 @@ public class GameServiceImpl implements GameService {
         GameServiceImpl.currentBatter += 1;
     }
 
-    public void addScoreToBatter(int runsScorePerBall) {
-        getBattingPlayer().setScore(runsScorePerBall);
-        getBattingPlayer().setBallsFaced(1);
-    }
-
-    public void setActiveStatusForPlayers() {
-        getBattingPlayer().setActiveStatus("active");
-        getBowlingPlayer().setActiveStatus("active");
-    }
-
-    public void saveScoreRecord() {
-        String overCount = String.valueOf(OverService.getOverCount()) + "." + OverService.getBallsCount();
-
-        scoreRecorderRepositoryService.saveScoreRecordPerBall(
-                scoreRecordBuilder.build(
-                        tempMatchId,
-                        overCount,
-                        scoreBoardDisplay.runsForDisplayProvider(runsScorePerBall),
-                        Innings,
-                        score.getScoreOfBothTeams()[Batting],
-                        WicketStatusProvider.getWicketLose(),
-                        getBattingPlayer(),
-                        getBowlingPlayer()
-                )
-        );
-    }
-
-    public String matchFormatScheduler(String matchFormat) {
-        plannedMatchFormat = matchFormat.toUpperCase();
-        GameServiceImpl.setTotalOvers(MatchFormatService.oversScheduler(plannedMatchFormat));
-        return plannedMatchFormat;
+    public void scoreAccumulator(int Batting, int runsScorePerBall) {
+        ScoreModel.addScore(Batting, runsScorePerBall);
+        AuxiliaryPlayerService.addScoreToBatter(runsScorePerBall);
+        GameServiceImpl.setLegalBallFlag(true);
     }
 
     public void startBattingAndBowling() {
         runsScorePerBall = runsGenerator.runsGeneratorByAbility(getBattingPlayer().getBaseAbility());
-        if (runsScorePerBall == -1) {
-            wicketTrackerFunc();
-            GameServiceImpl.setLegalBallFlag(true);
-        }
-        else if (runsScorePerBall == -2) {
-            IllegalBallTrackerService.wideTracker();
-            GameServiceImpl.setLegalBallFlag(false);
-        }
-        else if (runsScorePerBall == -3) {
-            IllegalBallTrackerService.noBallTracker();
-            GameServiceImpl.setLegalBallFlag(false);
-        }
-        else {
-            if (runsScorePerBall == 4) {
+
+        switch (runsScorePerBall) {
+            case -1:
+                wicketTracker.gotWicket();
+                GameServiceImpl.setLegalBallFlag(true);
+                break;
+            case -2:
+                IllegalBallTrackerService.wideTracker();
+                GameServiceImpl.setLegalBallFlag(false);
+                break;
+            case -3:
+                IllegalBallTrackerService.noBallTracker();
+                GameServiceImpl.setLegalBallFlag(false);
+                break;
+            case 0, 1, 2, 3:
+                scoreAccumulator(Batting, runsScorePerBall);
+                break;
+            case 4:
                 GameServiceImpl.getBattingPlayer().setNoOfFours(1);
-            }
-            if (runsScorePerBall == 6) {
+                scoreAccumulator(Batting, runsScorePerBall);
+                break;
+            case 6:
                 GameServiceImpl.getBattingPlayer().setNoOfSixes(1);
-            }
-            ScoreModel.addScore(Batting, runsScorePerBall);
-            addScoreToBatter(runsScorePerBall);
-            GameServiceImpl.setLegalBallFlag(true);
+                scoreAccumulator(Batting, runsScorePerBall);
+                break;
         }
 
         if (legalBallFlag) {
@@ -264,32 +165,15 @@ public class GameServiceImpl implements GameService {
                 flagForTeamWinningIndicationOnSecondInnings = "Game Over";
             }
         }
+
         scoreBoardDisplay.showStatusPerBall();
-        saveScoreRecord();
-
+        auxiliaryPlayerService.saveScoreRecord(runsScorePerBall);
     }
-
-    public List playingTeamPlayersProvider(long matchId) throws Exception {
-        matchTeams = matchRepositoryService.getMatchById(matchId);
-        playingTeams = new ArrayList<>();
-        List<Team> playingTeams =  matchTeams.getTeamsPlayed();
-        tempMatchId = matchId;
-        teams = teamSelectorService.teamSelector(
-                playingTeams.get(0).getTeamId(),
-                playingTeams.get(1).getTeamId()
-        );
-
-        playingTeamsPlayers = List.of(teams.get(0).getPlayers(), teams.get(1).getPlayers());
-        return playingTeamsPlayers;
-    }
-
 
     public String startGame(long matchId) throws Exception {
-        playingTeamsPlayers = playingTeamPlayersProvider(matchId);
+        auxiliaryPlayerService.playingTeamPlayersProvider(matchId);
         TossService.startTossing();
-        setActiveStatusForPlayers();
-
-
+        AuxiliaryPlayerService.setActiveStatusForPlayers();
         while (Innings <= 2) {
             if ((WicketStatusProvider.getWicketLose() > 9 || OverService.getOverCount() == totalOvers) && Innings == 1) {
                 wicketTracker.startSecondInnings();
@@ -305,13 +189,7 @@ public class GameServiceImpl implements GameService {
                 startBattingAndBowling();
             }
         }
-
-        matchTeams.setTeamsPlayed(getTeams());
-        matchTeams.setMatchFormat(getPlannedMatchFormat());
-        PlayerCenturyAndHalfCenturyService.centuryStatsProvider(playingTeamsPlayers);
-        matchRepositoryService.updateMatch(matchId, matchTeams);
-        statusService.saveMatchStatusRecord(matchId);
-        playerStatsRecorder.savePlayerStats(playingTeamsPlayers);
+        auxiliaryPlayerService.updateStatsAndScores(matchId);
         ResetGameService.resetGame();
         return "Match has Completed";
     }

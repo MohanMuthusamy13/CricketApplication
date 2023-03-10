@@ -1,5 +1,6 @@
 package com.example.CricketApplication.cricketgamesimulator.controller;
 
+import com.example.CricketApplication.cricketgamesimulator.service.services.matchformatservice.MatchFormatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class GameController {
             @RequestParam(value = "matchId") long matchId,
             @RequestParam(value = "matchFormat") String matchFormat
     ) throws Exception {
-        String format = cricket.matchFormatScheduler(matchFormat);
+        String format = MatchFormatService.matchFormatScheduler(matchFormat);
         String status = cricket.startGame(matchId);
         return new ResponseEntity<>("Match is completed", HttpStatus.OK);
     }

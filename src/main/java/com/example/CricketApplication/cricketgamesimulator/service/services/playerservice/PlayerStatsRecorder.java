@@ -1,7 +1,10 @@
 package com.example.CricketApplication.cricketgamesimulator.service.services.playerservice;
 
+import com.example.CricketApplication.cricketgamesimulator.entities.Match;
 import com.example.CricketApplication.cricketgamesimulator.entities.Player;
+import com.example.CricketApplication.cricketgamesimulator.entities.Team;
 import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceinterfaces.PlayerService;
+import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceinterfaces.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,9 @@ public class PlayerStatsRecorder {
 
     @Autowired
     public PlayerService playerService;
+
+    @Autowired
+    TeamService teamService;
 
     public void savePlayerStat(List<Player> updatedPlayers) {
         for (Player player : updatedPlayers) {
