@@ -35,9 +35,6 @@ public interface PlayerRepository extends MongoRepository<Player, Long> {
     })
     Player getMaxSixesHitter();
 
-    @Query(value = "{\"_id\" : ?0}")
-    Player getMaxScorerByMatchId(long playerId);
-
     List<Player> findByTeamName(String teamName);
 
     List<Player> findByBaseAbility(String baseAbility);

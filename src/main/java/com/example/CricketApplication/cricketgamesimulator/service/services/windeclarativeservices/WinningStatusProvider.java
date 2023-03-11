@@ -62,7 +62,6 @@ public class WinningStatusProvider {
 
 
     public byte checkWinningStatusNumber() {
-        // IF OVERS GOT COMPLETED
         if ((OverService.getOverCount() == GameServiceImpl.getTotalOvers()) || (GameServiceImpl.getFlagForTeamWinningIndicationOnSecondInnings().equals("Game Over"))) {
             if (checkWinningTeamCondition() == Constants.FIRST_TEAM_WINNING_INDICATION) {
                 return Constants.FIRST_TEAM_WINNING_INDICATION;

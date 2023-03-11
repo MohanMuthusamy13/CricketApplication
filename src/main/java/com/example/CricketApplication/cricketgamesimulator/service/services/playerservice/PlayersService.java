@@ -26,8 +26,7 @@ public class PlayersService {
     public List<Player> getPlayers(String teamName) {
         ArrayList<Player> playerTeam = new ArrayList<>();
         String baseAbility;
-        int playerCount = Constants.TOTAL_PLAYER_COUNT;
-        for (int i = 1; i <= playerCount; i++) {
+        for (int i = 1; i <= Constants.TOTAL_PLAYER_COUNT; i++) {
             if (i <= Constants.BATSMAN_COUNT) {
                 baseAbility = "Batsman";
             }

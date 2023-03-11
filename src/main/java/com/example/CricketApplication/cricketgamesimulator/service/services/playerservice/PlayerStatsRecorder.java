@@ -16,9 +16,6 @@ public class PlayerStatsRecorder {
     @Autowired
     public PlayerService playerService;
 
-    @Autowired
-    TeamService teamService;
-
     public void savePlayerStat(List<Player> updatedPlayers) {
         for (Player player : updatedPlayers) {
             player.setMatchesPlayed(player.getMatchesPlayed() + 1);
