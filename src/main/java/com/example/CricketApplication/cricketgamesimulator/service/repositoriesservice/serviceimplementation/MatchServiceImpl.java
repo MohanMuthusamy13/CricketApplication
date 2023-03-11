@@ -64,4 +64,8 @@ public class MatchServiceImpl implements MatchService {
     public PlayerStatsStructure getWicketTakerIdByMatch(long matchId) {
         return matchRepository.getMaxWicketTakerIdByMatch(matchId);
     }
+
+    public PlayerStatsStructure getMaxStrikeRatePlayer(long matchId) {
+        return matchRepository.getMaxStrikeRatePlayer(matchId);
+    }
 }

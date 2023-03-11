@@ -12,6 +12,7 @@ import com.example.CricketApplication.cricketgamesimulator.service.services.scor
 import com.example.CricketApplication.cricketgamesimulator.service.services.scoreservice.ScoreModel;
 import com.example.CricketApplication.cricketgamesimulator.service.services.teamservices.TeamSelectorService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.windeclarativeservices.WicketStatusProvider;
+import com.example.CricketApplication.cricketgamesimulator.utils.Constants;
 import com.example.CricketApplication.cricketgamesimulator.view.ScoreBoardDisplay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,13 +56,13 @@ public class AuxiliaryPlayerService {
         List<Team> playingTeams =  GameServiceImpl.getMatchTeams().getTeamsPlayed();
         GameServiceImpl.setTempMatchId(matchId);
         GameServiceImpl.setTeams(teamSelectorService.teamSelector(
-                playingTeams.get(0).getTeamId(),
-                playingTeams.get(1).getTeamId()
+                playingTeams.get(Constants.FIRST_TEAM).getTeamId(),
+                playingTeams.get(Constants.SECOND_TEAM).getTeamId()
         ));
         GameServiceImpl.setPlayingTeamsPlayers(
                 List.of(
-                        GameServiceImpl.getTeams().get(0).getPlayers(),
-                        GameServiceImpl.getTeams().get(1).getPlayers()
+                        GameServiceImpl.getTeams().get(Constants.FIRST_TEAM).getPlayers(),
+                        GameServiceImpl.getTeams().get(Constants.SECOND_TEAM).getPlayers()
                 )
         );
     }

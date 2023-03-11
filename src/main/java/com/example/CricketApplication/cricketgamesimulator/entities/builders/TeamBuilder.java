@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 public class TeamBuilder {
 
     private SequenceGeneratorService sequenceGeneratorService;
-
     private PlayersService playersTeamService;
-
     private TeamRepository teamRepository;
 
     @Autowired

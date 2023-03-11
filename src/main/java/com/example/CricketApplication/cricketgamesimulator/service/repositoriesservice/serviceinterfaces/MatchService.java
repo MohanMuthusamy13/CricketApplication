@@ -14,4 +14,6 @@ public interface MatchService {
     Match updateMatch(long matchId, Match match) throws Exception;
     PlayerStatsStructure getMaxScorerIdByMatch(long matchId);
     PlayerStatsStructure getWicketTakerIdByMatch(long matchId);
+
+    PlayerStatsStructure getMaxStrikeRatePlayer(long matchId);
 }

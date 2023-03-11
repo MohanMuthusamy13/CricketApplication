@@ -11,6 +11,7 @@ import com.example.CricketApplication.cricketgamesimulator.service.services.scor
 import com.example.CricketApplication.cricketgamesimulator.service.services.tossservice.TossService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.windeclarativeservices.WicketStatusProvider;
 import com.example.CricketApplication.cricketgamesimulator.service.services.windeclarativeservices.WinningStatusProvider;
+import com.example.CricketApplication.cricketgamesimulator.utils.Constants;
 import com.example.CricketApplication.cricketgamesimulator.view.ScoreBoardDisplay;
 import lombok.Data;
 import lombok.Getter;
@@ -29,7 +30,7 @@ public class GameServiceImpl implements GameService {
     @Getter @Setter
     private static List playingTeams;
     private static int currentBatter;
-    private static int currentBowler = 7;
+    private static int currentBowler = Constants.FIRST_BOWLER_IN_TEAM;
     @Getter @Setter
     private static int[] scoreTeams = new int[2];
     @Getter @Setter
@@ -77,7 +78,7 @@ public class GameServiceImpl implements GameService {
         new ScoreModel().setScoreOfBothTeams(new int[2]);
         GameServiceImpl.scoreTeams = new ScoreModel().getScoreOfBothTeams();
         GameServiceImpl.wickets = WicketStatusProvider.getWicketLose();
-        GameServiceImpl.Innings = 1;
+        GameServiceImpl.Innings = Constants.FIRST_INNINGS;
     }
 
     public static Player getBattingPlayer() {
@@ -99,11 +100,11 @@ public class GameServiceImpl implements GameService {
     }
 
     public static void setNextBowler() {
-        if (currentBowler < 10) {
+        if (currentBowler < Constants.LAST_BOWLER_IN_TEAM) {
             currentBowler += 1;
         }
         else {
-            setCurrentBowler(7);
+            setCurrentBowler(Constants.FIRST_BOWLER_IN_TEAM);
         }
     }
 
@@ -121,26 +122,27 @@ public class GameServiceImpl implements GameService {
         runsScorePerBall = runsGenerator.runsGeneratorByAbility(getBattingPlayer().getBaseAbility());
 
         switch (runsScorePerBall) {
-            case -1:
+            case Constants.WICKET:
                 wicketTracker.gotWicket();
                 GameServiceImpl.setLegalBallFlag(true);
                 break;
-            case -2:
+            case Constants.WIDE:
                 IllegalBallTrackerService.wideTracker();
                 GameServiceImpl.setLegalBallFlag(false);
                 break;
-            case -3:
+            case Constants.NO_BALL:
                 IllegalBallTrackerService.noBallTracker();
                 GameServiceImpl.setLegalBallFlag(false);
                 break;
-            case 0, 1, 2, 3:
+            case Constants.DOT_BALL, Constants.ONE_RUN,
+                    Constants.TWO_RUNS, Constants.THREE_RUNS, Constants.FIVE_RUNS:
                 scoreAccumulator(Batting, runsScorePerBall);
                 break;
-            case 4:
+            case Constants.BOUNDARY:
                 GameServiceImpl.getBattingPlayer().setNoOfFours(1);
                 scoreAccumulator(Batting, runsScorePerBall);
                 break;
-            case 6:
+            case Constants.SIX:
                 GameServiceImpl.getBattingPlayer().setNoOfSixes(1);
                 scoreAccumulator(Batting, runsScorePerBall);
                 break;
@@ -160,7 +162,7 @@ public class GameServiceImpl implements GameService {
                 OverService.IncreaseBallCount();
         }
 
-        if (Innings == 2) {
+        if (Innings == Constants.SECOND_INNINGS) {
             if (!checkWinning.checkWinningStatusForSecondInnings().equals("")){
                 flagForTeamWinningIndicationOnSecondInnings = "Game Over";
             }
@@ -174,13 +176,15 @@ public class GameServiceImpl implements GameService {
         auxiliaryPlayerService.playingTeamPlayersProvider(matchId);
         TossService.startTossing();
         AuxiliaryPlayerService.setActiveStatusForPlayers();
-        while (Innings <= 2) {
-            if ((WicketStatusProvider.getWicketLose() > 9 || OverService.getOverCount() == totalOvers) && Innings == 1) {
+        while (Innings <= Constants.SECOND_INNINGS) {
+            if ((WicketStatusProvider.getWicketLose() > Constants.LAST_WICKET || OverService.getOverCount() == totalOvers)
+                    && Innings == Constants.FIRST_INNINGS) {
                 wicketTracker.startSecondInnings();
             }
-            else if ((Innings == 2 && (OverService.getOverCount() == totalOvers)) ||
+            else if ((Innings == Constants.SECOND_INNINGS && (OverService.getOverCount() == totalOvers)) ||
                     ((GameServiceImpl.flagForTeamWinningIndicationOnSecondInnings).equals("Game Over")) ||
-                    (WicketStatusProvider.getWicketLose() >= 9 && WicketStatusProvider.isWicketFlag())){
+                    (WicketStatusProvider.getWicketLose() >= Constants.LAST_WICKET
+                            && WicketStatusProvider.isAllWicketsDownInSecondInnings())){
                 scoreBoardDisplay.showScoreOfBothTeams();
                 checkWinning.checkWinningStatus();
                 break;

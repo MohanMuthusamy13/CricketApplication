@@ -2,34 +2,24 @@ package com.example.CricketApplication.cricketgamesimulator.service.services.win
 
 import com.example.CricketApplication.cricketgamesimulator.service.services.majorgameservice.GameServiceImpl;
 import com.example.CricketApplication.cricketgamesimulator.service.services.overservice.OverService;
+import com.example.CricketApplication.cricketgamesimulator.utils.Constants;
 import com.example.CricketApplication.cricketgamesimulator.view.ScoreBoardDisplay;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WicketStatusProvider extends WinningStatusProvider {
+
+    @Getter @Setter
     private static int wicketLose;
-    private static boolean wicketFlag = false;
-
-    public static boolean isWicketFlag() {
-        return wicketFlag;
-    }
-
-    public static int getWicketLose() {
-        return wicketLose;
-    }
-
-    public static void setWicketLose(int wicketLose) {
-        WicketStatusProvider.wicketLose = wicketLose;
-    }
-
-    public static void setWicketFlag(boolean wicketFlag) {
-        WicketStatusProvider.wicketFlag = wicketFlag;
-    }
+    @Getter @Setter
+    private static boolean allWicketsDownInSecondInnings = false;
 
     public void gotWicket() {
-        if (wicketLose >= 9) {
-            if (GameServiceImpl.getInnings() == 2) {
-                wicketFlag = true;
+        if (wicketLose >= Constants.LAST_WICKET) {
+            if (GameServiceImpl.getInnings() == Constants.SECOND_INNINGS) {
+                allWicketsDownInSecondInnings = true;
             }
             else {
                 startSecondInnings();
@@ -37,36 +27,32 @@ public class WicketStatusProvider extends WinningStatusProvider {
         }
         else {
             wicketLose++;
-
-            GameServiceImpl.getBattingPlayer().setBallsFaced(1);
+            GameServiceImpl.getBattingPlayer().setBallsFaced(Constants.INCREASE_BALL_COUNT);
             GameServiceImpl.getBattingPlayer().setActiveStatus("inactive");
-
             GameServiceImpl.setNextBatter();
             GameServiceImpl.getBattingPlayer().setActiveStatus("active");
-
-            GameServiceImpl.getBowlingPlayer().setWicketsTaken(1);
+            GameServiceImpl.getBowlingPlayer().setWicketsTaken(Constants.INCREASE_WICKET_COUNT);
         }
     }
 
     public void startSecondInnings() {
 
         ScoreBoardDisplay.printFirstInningsFinalScore();
-
         System.out.println("\nStarted 2nd Innings :)");
         GameServiceImpl.getBattingPlayer().setActiveStatus("inactive");
         GameServiceImpl.getBowlingPlayer().setActiveStatus("inactive");
-        GameServiceImpl.setInnings(2);
-        wicketLose = 0;
-
+        GameServiceImpl.setInnings(Constants.SECOND_INNINGS);
+        wicketLose = Constants.INITIAL_WICKET_LOSE;
         GameServiceImpl.setBatting(Math.abs(1 - GameServiceImpl.getBatting()));
-        score.setCurrentScore(0);
-
+        score.setCurrentScore(Constants.INITIAL_SCORE);
         OverService.startFromFirstOver();
-        GameServiceImpl.setCurrentBatter(0);
-        OverService.setTempBallCount(0);
-        GameServiceImpl.setCurrentBowler(7);
-        GameServiceImpl.setRunsScorePerBall(0);
-
-        System.out.printf("The over got initialized %d.%d%n", OverService.getOverCount(), OverService.getBallsCount());
+        GameServiceImpl.setCurrentBatter(Constants.FIRST_BATTER_IN_TEAM);
+        OverService.setTempBallCount(Constants.INITIAL_BALL_COUNT);
+        GameServiceImpl.setCurrentBowler(Constants.FIRST_BOWLER_IN_TEAM);
+        GameServiceImpl.setRunsScorePerBall(Constants.INITIAL_SCORE);
+        System.out.printf(
+                "The over got initialized %d.%d%n",
+                OverService.getOverCount(), OverService.getBallsCount()
+        );
     }
 }

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlayerStatsStructure {
-
     private long _id;
 
     private String name;
@@ -22,4 +21,7 @@ public class PlayerStatsStructure {
     private int ballsFaced;
 
     private int ballsBowled;
+
+    private float strikeRate;
+
 }

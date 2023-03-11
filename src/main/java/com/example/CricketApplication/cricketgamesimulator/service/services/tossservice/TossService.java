@@ -3,6 +3,7 @@ package com.example.CricketApplication.cricketgamesimulator.service.services.tos
 
 import com.example.CricketApplication.cricketgamesimulator.entities.enums.Toss;
 import com.example.CricketApplication.cricketgamesimulator.service.services.majorgameservice.GameServiceImpl;
+import com.example.CricketApplication.cricketgamesimulator.utils.Constants;
 import com.example.CricketApplication.cricketgamesimulator.view.TossDisplay;
 
 public class TossService {
@@ -20,12 +21,12 @@ public class TossService {
         int teamSelected = tossWinner.getBattingOrderIndicator();
         TossDisplay.tossDisplayed(teamSelected);
         if (teamSelected == 0) {
-            GameServiceImpl.setBatting(1);
-            GameServiceImpl.setBowling(0);
+            GameServiceImpl.setBatting(Constants.SECOND_TEAM);
+            GameServiceImpl.setBowling(Constants.FIRST_TEAM);
         }
         else {
-            GameServiceImpl.setBatting(0);
-            GameServiceImpl.setBowling(1);
+            GameServiceImpl.setBatting(Constants.FIRST_TEAM);
+            GameServiceImpl.setBowling(Constants.SECOND_TEAM);
         }
     }
 }

@@ -22,24 +22,30 @@ public class MatchController {
     private MatchBuilder matchBuilder;
 
     @GetMapping("/{id}")
-    public Match getMatchById(
+    public ResponseEntity<Match> getMatchById(
             @PathVariable(value = "id") Long id
     ) throws Exception {
-        return matchRepositoryService.getMatchById(id);
+        return new ResponseEntity<>(
+                matchRepositoryService.getMatchById(id),
+                HttpStatus.OK);
     }
 
     @GetMapping("/getMatchesPlayedByTeamName")
-    public List<Match> getMatchesPlayedByTeamName(
+    public ResponseEntity<List<Match>> getMatchesPlayedByTeamName(
             @RequestParam(value = "teamName") String teamName
     ) {
-        return matchRepositoryService.getMatchesPlayedByTeamName(teamName);
+        return new ResponseEntity<>(
+                matchRepositoryService.getMatchesPlayedByTeamName(teamName),
+                HttpStatus.OK);
     }
 
     @GetMapping("/getMatchesCountPlayedByTeamName")
-    public int getMatchesCountPlayedByTeamName(
+    public ResponseEntity<Integer> getMatchesCountPlayedByTeamName(
             @RequestParam(value = "teamName") String teamName
     ) {
-        return matchRepositoryService.getMatchesCountPlayedByTeamName(teamName);
+        return new ResponseEntity<>(
+                matchRepositoryService.getMatchesCountPlayedByTeamName(teamName),
+                HttpStatus.OK);
     }
 
     @PostMapping("/createMatch")

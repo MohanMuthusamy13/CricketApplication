@@ -16,7 +16,6 @@ import java.util.Map;
 @Builder
 @Document(collection = "MatchStatus")
 public class MatchStatusRecord {
-
     public static final String SEQUENCE_NAME = "matchStatusRecorderSeq";
 
     @Id

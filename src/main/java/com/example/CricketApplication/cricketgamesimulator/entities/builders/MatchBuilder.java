@@ -13,7 +13,6 @@ import java.util.List;
 public class MatchBuilder {
 
     private SequenceGeneratorService sequenceGeneratorService;
-
     private TeamServiceImpl teamRepositoryService;
 
     @Autowired
@@ -29,18 +28,6 @@ public class MatchBuilder {
     public Match build(String format, long teamId1, long teamId2) throws IOException {
         return Match.builder()
                 .matchId(sequenceGeneratorService.getSequenceNumber(Match.SEQUENCE_NAME))
-                .teamsPlayed(
-                        List.of(
-                                teamRepositoryService.getTeamById(teamId1),
-                                teamRepositoryService.getTeamById(teamId2)
-                        ))
-                .matchFormat(format)
-                .build();
-    }
-
-    public Match buildForTest(long matchId, String format, long teamId1, long teamId2) throws IOException {
-        return Match.builder()
-                .matchId(matchId)
                 .teamsPlayed(
                         List.of(
                                 teamRepositoryService.getTeamById(teamId1),

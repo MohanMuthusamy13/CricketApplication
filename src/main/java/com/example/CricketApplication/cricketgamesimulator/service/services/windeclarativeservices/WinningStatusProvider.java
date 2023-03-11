@@ -3,35 +3,37 @@ package com.example.CricketApplication.cricketgamesimulator.service.services.win
 import com.example.CricketApplication.cricketgamesimulator.service.services.scoreservice.ScoreModel;
 import com.example.CricketApplication.cricketgamesimulator.service.services.majorgameservice.GameServiceImpl;
 import com.example.CricketApplication.cricketgamesimulator.service.services.overservice.OverService;
+import com.example.CricketApplication.cricketgamesimulator.utils.Constants;
 
 public class WinningStatusProvider {
 
     ScoreModel score = new ScoreModel();
 
     public byte checkWinningTeamCondition() {
-        if (score.getScoreOfBothTeams()[0] > score.getScoreOfBothTeams()[1]) {
-            return 1;
-        } else if (score.getScoreOfBothTeams()[0] < score.getScoreOfBothTeams()[1]){
-            return 2;
+        if (ScoreModel.getScoreOfBothTeams()[Constants.FIRST_TEAM] >
+                ScoreModel.getScoreOfBothTeams()[Constants.SECOND_TEAM]) {
+            return Constants.FIRST_TEAM_WINNING_INDICATION;
+        } else if (ScoreModel.getScoreOfBothTeams()[Constants.FIRST_TEAM] <
+                ScoreModel.getScoreOfBothTeams()[Constants.SECOND_TEAM]){
+            return Constants.SECOND_TEAM_WINNING_INDICATION;
         }
-        return 3;
+        return Constants.DRAW_INDICATION;
     }
 
-
     public String checkWinningStatusForSecondInnings() {
-        if ((GameServiceImpl.getInnings() == 2)
+        if ((GameServiceImpl.getInnings() == Constants.SECOND_INNINGS)
                 && ((GameServiceImpl.getScoreTeams()[GameServiceImpl.getBatting()] >
                 GameServiceImpl.getScoreTeams()[Math.abs(1 - GameServiceImpl.getBatting())]))){
             return "Current Team Wins";
         }
-        else if (WicketStatusProvider.isWicketFlag()) {
+        else if (WicketStatusProvider.isAllWicketsDownInSecondInnings()) {
             return "Current Team Loses";
         }
         return "";
     }
 
     public static int winningWicketsDifference() {
-        return 10 - WicketStatusProvider.getWicketLose();
+        return Constants.TOTAL_WICKETS - WicketStatusProvider.getWicketLose();
     }
 
     public static int winningRunsDifference() {
@@ -41,13 +43,19 @@ public class WinningStatusProvider {
 
     public static String diffProvider(int winningTeam) {
         String diffReveler = "";
-        if (GameServiceImpl.getFlagForTeamWinningIndicationOnSecondInnings().equals("Current Team Wins")) {
-            diffReveler = String.format("Team %d won by %d wickets"
-                    , winningTeam, winningWicketsDifference());
+        if (GameServiceImpl
+                .getFlagForTeamWinningIndicationOnSecondInnings().equals("Current Team Wins")) {
+            diffReveler = String.format(
+                    "Team %d won by %d wickets"
+                    , winningTeam, winningWicketsDifference()
+            );
         }
-        else if (GameServiceImpl.getFlagForTeamWinningIndicationOnSecondInnings().equals("Current Team Loses")){
-            diffReveler = String.format("Team %d won by %d runs"
-                   , winningTeam, winningRunsDifference());
+        else if (GameServiceImpl
+                .getFlagForTeamWinningIndicationOnSecondInnings().equals("Current Team Loses")){
+            diffReveler = String.format(
+                    "Team %d won by %d runs"
+                   , winningTeam, winningRunsDifference()
+            );
         }
         return diffReveler;
     }
@@ -56,26 +64,25 @@ public class WinningStatusProvider {
     public byte checkWinningStatusNumber() {
         // IF OVERS GOT COMPLETED
         if ((OverService.getOverCount() == GameServiceImpl.getTotalOvers()) || (GameServiceImpl.getFlagForTeamWinningIndicationOnSecondInnings().equals("Game Over"))) {
-            if (checkWinningTeamCondition() == 1) {
-                return 1;
+            if (checkWinningTeamCondition() == Constants.FIRST_TEAM_WINNING_INDICATION) {
+                return Constants.FIRST_TEAM_WINNING_INDICATION;
             }
-            else if (checkWinningTeamCondition() == 2){
-                return 2;
+            else if (checkWinningTeamCondition() == Constants.SECOND_TEAM_WINNING_INDICATION){
+                return Constants.SECOND_TEAM_WINNING_INDICATION;
             }
         }
-        return 3;
+        return Constants.DRAW_INDICATION;
     }
 
     public void checkWinningStatus() {
-        if (checkWinningStatusNumber() == 1) {
+        if (checkWinningStatusNumber() == Constants.FIRST_TEAM_WINNING_INDICATION) {
             System.out.println("The Game is over :)"+ "\n" +"Team 1 Wins");
             System.out.println(GameServiceImpl.getFlagForTeamWinningIndicationOnSecondInnings());
             System.out.println(diffProvider(1));
-        } else if (checkWinningStatusNumber() == 2) {
+        } else if (checkWinningStatusNumber() == Constants.SECOND_TEAM_WINNING_INDICATION) {
             System.out.println("The Game is over :)"+ "\n" +"Team 2 Wins");
             System.out.println(diffProvider(2));
             System.out.println(GameServiceImpl.getFlagForTeamWinningIndicationOnSecondInnings());
-
         }
         else {
             System.out.println("The Game is over :)" + "\n" +"Game is drawn");

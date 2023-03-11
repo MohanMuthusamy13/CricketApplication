@@ -3,6 +3,7 @@ package com.example.CricketApplication.cricketgamesimulator.service.services.pla
 
 import com.example.CricketApplication.cricketgamesimulator.entities.Player;
 import com.example.CricketApplication.cricketgamesimulator.entities.builders.PlayerBuilder;
+import com.example.CricketApplication.cricketgamesimulator.utils.Constants;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,6 @@ import java.util.List;
 
 @Component
 public class PlayersService {
-
 
     @Autowired
     private PlayerBuilder playerBuilder;
@@ -26,9 +26,9 @@ public class PlayersService {
     public List<Player> getPlayers(String teamName) {
         ArrayList<Player> playerTeam = new ArrayList<>();
         String baseAbility;
-        int playerCount = 11;
+        int playerCount = Constants.TOTAL_PLAYER_COUNT;
         for (int i = 1; i <= playerCount; i++) {
-            if (i < 6) {
+            if (i <= Constants.BATSMAN_COUNT) {
                 baseAbility = "Batsman";
             }
             else {
@@ -46,13 +46,12 @@ public class PlayersService {
     }
 
     public static void checkForCenturiesAndHalfCenturies(Player player) {
-        if (player.getScore() >= 100) {
-            player.setCenturies(1);
+        if (player.getScore() >= Constants.CENTURY) {
+            player.setCenturies(Constants.INCREASE_CENTURY_COUNT);
             return;
         }
-
-        if (player.getScore() >= 50) {
-            player.setHalfCenturies(1);
+        if (player.getScore() >= Constants.HALF_CENTURY) {
+            player.setHalfCenturies(Constants.INCREASE_HALF_CENTURY_COUNT);
         }
     }
 }

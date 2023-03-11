@@ -14,7 +14,6 @@ import java.util.Scanner;
 public class TeamSelectorService {
 
     private static List<Team> teams;
-
     private TeamServiceImpl teamRepositoryService;
 
     @Autowired
@@ -22,14 +21,10 @@ public class TeamSelectorService {
         this.teamRepositoryService = teamRepositoryService;
     }
 
-    Scanner sc = new Scanner(System.in);
-
     public List<Team> teamSelector(long team1Id, long team2Id) throws IOException {
         teams = new ArrayList<>();
         teams.add(teamRepositoryService.getTeamById(team1Id));
         teams.add(teamRepositoryService.getTeamById(team2Id));
         return teams;
     }
-
-
 }

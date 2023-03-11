@@ -10,11 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlayerBuilder {
     private String playerName;
-    private int playerScore;
-    private int ballsFaced;
-    private int ballsBowled;
-    private int wicketsTaken;
-    private int matchesPlayed;
     private String baseAbility;
     private String teamName;
     private Team team;
@@ -24,31 +19,6 @@ public class PlayerBuilder {
 
     public PlayerBuilder setPlayerName(String name) {
         this.playerName = name;
-        return this;
-    }
-
-    public PlayerBuilder setPlayerScore(int score) {
-        this.playerScore = score;
-        return this;
-    }
-
-    public PlayerBuilder setBallsFaced(int ballsFaced) {
-        this.ballsFaced = ballsFaced;
-        return this;
-    }
-
-    public PlayerBuilder setBallsBowled(int ballsBowled) {
-        this.ballsBowled = ballsBowled;
-        return this;
-    }
-
-    public PlayerBuilder setMatchesPlayed(int matchesPlayed) {
-        this.matchesPlayed = matchesPlayed;
-        return this;
-    }
-
-    public PlayerBuilder setWicketsTaken(int wicketsTaken) {
-        this.wicketsTaken = wicketsTaken;
         return this;
     }
 
@@ -66,7 +36,6 @@ public class PlayerBuilder {
         this.team = team;
         return this;
     }
-
 
     public Player createPlayer() {
         if (baseAbility.equals("Batsman")) {
