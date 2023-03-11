@@ -1,6 +1,7 @@
 package com.example.CricketApplication.cricketgamesimulator.controller;
 
 import com.example.CricketApplication.cricketgamesimulator.service.services.majorgameservice.GameServiceImpl;
+import com.example.CricketApplication.cricketgamesimulator.service.services.matchformatservice.MatchFormatService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,7 +41,6 @@ class GameControllerTest {
 
     @Test
     void startMatch() throws Exception {
-        Mockito.when(cricket.matchFormatScheduler(matchFormat)).thenReturn(matchFormat.toUpperCase());
         Mockito.when(cricket.startGame(matchId)).thenReturn("Match has Completed");
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders

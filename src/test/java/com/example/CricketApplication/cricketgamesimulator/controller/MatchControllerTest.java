@@ -93,9 +93,7 @@ class MatchControllerTest {
 
     @Test
     void getMatchesCountPlayedByTeamName() throws Exception {
-        Mockito.when(matchController.getMatchesCountPlayedByTeamName(team1.getTeamName()))
-                .thenReturn(1);
-
+        Mockito.when(matchRepositoryService.getMatchesCountPlayedByTeamName(team1.getTeamName())).thenReturn(1);
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
                 .get("/cricketGame/match/getMatchesCountPlayedByTeamName")
                 .param("teamName", team1.getTeamName());
