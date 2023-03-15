@@ -23,13 +23,13 @@ public class MatchStatusRecord {
     @Id
     private String matchStatusRecordId;
 
-    @Field(type = FieldType.Keyword, name = "MatchId")
+    @Field(type = FieldType.Keyword, name = "match_id")
     private String matchId;
 
-    @Field(type = FieldType.Object, name = "Score Of Teams")
+    @Field(type = FieldType.Object, name = "score_of_teams")
     private Map<String, Integer> scoreOfBothTeams;
 
-    @Field(type = FieldType.Text, name = "MatchStatus")
+    @Field(type = FieldType.Text, name = "match_status")
     private String matchStatus;
 
 }

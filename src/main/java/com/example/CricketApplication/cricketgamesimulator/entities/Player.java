@@ -17,46 +17,46 @@ public class Player {
     @Id
     private String id;
 
-    @Field(type = FieldType.Keyword, name = "Name")
+    @Field(type = FieldType.Keyword, name = "name")
     private String name;
 
-    @Field(type = FieldType.Integer, name = "Score")
+    @Field(type = FieldType.Integer, name = "score")
     private int score;
 
-    @Field(type = FieldType.Integer, name = "BallsFaced")
+    @Field(type = FieldType.Integer, name = "balls_faced")
     @ToString.Exclude
     private int ballsFaced;
 
-    @Field(type = FieldType.Integer, name = "BallsBowled")
+    @Field(type = FieldType.Integer, name = "balls_bowled")
     @ToString.Exclude
     private int ballsBowled;
 
-    @Field(type = FieldType.Integer, name = "WicketsTaken")
+    @Field(type = FieldType.Integer, name = "wickets_taken")
     private int wicketsTaken;
 
-    @Field(type = FieldType.Keyword, name = "BaseAbility")
+    @Field(type = FieldType.Keyword, name = "base_ability")
     private String baseAbility;
 
-    @Field(type = FieldType.Integer, name = "MatchesPlayed")
+    @Field(type = FieldType.Integer, name = "matches_played")
     private int matchesPlayed;
 
-    @Field(type = FieldType.Integer, name = "NoOfFours")
+    @Field(type = FieldType.Integer, name = "no_of_fours")
     private int noOfFours;
 
-    @Field(type = FieldType.Integer, name = "NoOfSixes")
+    @Field(type = FieldType.Integer, name = "no_of_sixes")
     private int noOfSixes;
 
-    @Field(type = FieldType.Integer, name = "HalfCenturiesCount")
+    @Field(type = FieldType.Integer, name = "halfCenturies_count")
     private int halfCenturies;
 
-    @Field(type = FieldType.Integer, name = "CenturiesCount")
+    @Field(type = FieldType.Integer, name = "centuries_count")
     private int centuries;
 
-    @Field(type = FieldType.Text, name = "ActiveStatus")
+    @Field(type = FieldType.Text, name = "active_status")
     @Builder.Default @ToString.Exclude
     private String activeStatus = "inactive";
 
-    @Field(type = FieldType.Keyword, name = "teamName")
+    @Field(type = FieldType.Keyword, name = "team_name")
     private String teamName;
 
     public Player(String name, int score, int ballsFaced, int ballsBowled, int wicketsTaken, String baseAbility, int matchesPlayed, int noOfFours, int noOfSixes, int halfCenturies, int centuries, String activeStatus, String teamName) {

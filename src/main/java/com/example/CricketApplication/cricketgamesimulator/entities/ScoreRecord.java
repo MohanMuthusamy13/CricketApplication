@@ -19,27 +19,27 @@ public class ScoreRecord {
     @Id
     private String ballId;
 
-    @Field(type = FieldType.Keyword, name = "MatchId")
+    @Field(type = FieldType.Keyword, name = "match_id")
     private String matchId;
 
-    @Field(type = FieldType.Text, name = "OverCount")
+    @Field(type = FieldType.Text, name = "over_count")
     private String overCount;
 
-    @Field(type = FieldType.Keyword, name = "BallOutCome")
+    @Field(type = FieldType.Keyword, name = "ball_outCome")
     private String ballOutcome;
 
-    @Field(type = FieldType.Integer, name = "Innings")
+    @Field(type = FieldType.Integer, name = "innings")
     private int innings;
 
-    @Field(type = FieldType.Integer, name = "TotalRunsScored")
+    @Field(type = FieldType.Integer, name = "total_runs_scored")
     private int totalRunsScoredByBattingTeam;
 
-    @Field(type = FieldType.Integer, name = "TotalWicketsDown")
+    @Field(type = FieldType.Integer, name = "total_wickets_down")
     private int totalWicketsDown;
 
-    @Field(type = FieldType.Object, name = "Batsman")
+    @Field(type = FieldType.Object, name = "batsman")
     private Player batsman;
 
-    @Field(type = FieldType.Object, name = "Bowler")
+    @Field(type = FieldType.Object, name = "bowler")
     private Player bowler;
 }

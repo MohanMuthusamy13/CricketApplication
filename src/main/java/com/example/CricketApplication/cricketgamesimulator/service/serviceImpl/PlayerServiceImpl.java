@@ -7,6 +7,8 @@ import com.example.CricketApplication.cricketgamesimulator.service.repositoriess
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
@@ -50,5 +52,20 @@ public class PlayerServiceImpl implements PlayerService {
 
         playerRepository.save(tempPlayer);
         return tempPlayer;
+    }
+
+    @Override
+    public List<Player> getPlayersByTeamAndBaseAbility(String teamName, String baseAbility) {
+        return playerRepository.getPlayersByTeamAndBaseAbility(teamName, baseAbility);
+    }
+
+    @Override
+    public List<Player> getPlayerByName(String name) {
+        return playerRepository.getPlayerByName(name);
+    }
+
+    @Override
+    public List<Player> getPlayersByTeamName(String teamName) {
+        return playerRepository.getPlayersByTeamName(teamName);
     }
 }

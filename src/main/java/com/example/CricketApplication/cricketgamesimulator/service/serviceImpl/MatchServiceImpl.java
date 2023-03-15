@@ -7,6 +7,8 @@ import com.example.CricketApplication.cricketgamesimulator.service.repositoriess
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MatchServiceImpl implements MatchService {
 
@@ -41,6 +43,13 @@ public class MatchServiceImpl implements MatchService {
         match.setTeamsPlayed(updatedMatch.getTeamsPlayed());
         match.setMatchStatus(updatedMatch.getMatchStatus());
 
+        matchRepository.save(match);
+
         return match;
+    }
+
+    @Override
+    public List<Match> getMatchesByMatchFormat(String matchFormat) {
+        return matchRepository.findByMatchFormat(matchFormat);
     }
 }

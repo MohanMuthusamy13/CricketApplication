@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/cricketGame/player")
 public class PlayerController {
@@ -28,30 +30,35 @@ public class PlayerController {
         );
     }
 
-//    @GetMapping("/getPlayerByName")
-//    public ResponseEntity<Player> getPlayerByName(
-//            @RequestParam(value = "name") String name
-//    ) throws Exception {
-//        return new ResponseEntity<>(
-//                playerRepositoryService.findByName(name), HttpStatus.OK
-//        );
-//    }
+    @GetMapping("/getPlayerByName")
+    public ResponseEntity<List<Player>> getPlayerByName(
+            @RequestParam(value = "name") String name
+    ) throws Exception {
+        return new ResponseEntity<>(
+                playerRepositoryService.getPlayerByName(name), HttpStatus.OK
+        );
+    }
 
-//    @GetMapping("/getPlayersWithTeamName")
-//    public ResponseEntity<List<Player>> getPlayersWithTeamName(
-//            @RequestParam(value = "teamName") String teamName
-//    ) {
-//        return new ResponseEntity<>(
-//                playerRepositoryService.getPlayersWithTeamName(teamName), HttpStatus.OK
-//        );
-//    }
-//
-//    @GetMapping("/getPlayersWithBaseAbility")
-//    public ResponseEntity<List<Player>> getPlayersWithBaseAbility(
-//            @RequestParam(value = "baseAbility") String baseAbility
-//    ) {
-//        return new ResponseEntity<>(
-//                playerRepositoryService.getPlayersWithBaseAbility(baseAbility), HttpStatus.OK
-//        );
-//    }
+    @GetMapping("/getPlayersWithTeamAndBaseAbility")
+    public ResponseEntity<List<Player>> getPlayersWithBaseAbility(
+            @RequestParam(value = "teamName") String teamName,
+            @RequestParam(value = "baseAbility") String baseAbility
+    ) {
+        return new ResponseEntity<>(
+                playerRepositoryService
+                        .getPlayersByTeamAndBaseAbility(teamName, baseAbility)
+                , HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/getPlayersWithTeamName")
+    public ResponseEntity<List<Player>> getPlayersWithTeamName(
+            @RequestParam(value = "teamName") String teamName
+    ) {
+        return new ResponseEntity<>(
+                playerRepositoryService.getPlayersByTeamName(teamName), HttpStatus.OK
+        );
+    }
+
+
 }

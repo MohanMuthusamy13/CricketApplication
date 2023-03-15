@@ -19,13 +19,13 @@ public class Team {
     @Id
     private String teamId;
 
-    @Field(type = FieldType.Keyword, name = "TeamName")
+    @Field(type = FieldType.Keyword, name = "team_name")
     private String teamName;
 
-    @Field(type = FieldType.Integer, name = "MatchesPlayed")
+    @Field(type = FieldType.Integer, name = "matches_played")
     private int matchesPlayed;
 
-    @Field(type = FieldType.Nested, name = "Players")
+    @Field(type = FieldType.Nested, name = "players")
     private List<Player> players;
 
 }

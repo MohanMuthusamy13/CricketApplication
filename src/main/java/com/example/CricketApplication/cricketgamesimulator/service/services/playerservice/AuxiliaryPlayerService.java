@@ -71,7 +71,8 @@ public class AuxiliaryPlayerService {
         GameServiceImpl.getMatchTeams().setTeamsPlayed(GameServiceImpl.getTeams());
         GameServiceImpl.getMatchTeams().setMatchFormat(MatchFormatService.getPlannedMatchFormat());
         PlayerCenturyAndHalfCenturyService.centuryStatsProvider(GameServiceImpl.getPlayingTeamsPlayers());
-        matchRepositoryService.updateMatch(matchId, GameServiceImpl.getMatchTeams());
+        System.out.println(GameServiceImpl.getMatchTeams());
+        System.out.println(matchRepositoryService.updateMatch(matchId, GameServiceImpl.getMatchTeams()));
         statusService.saveMatchStatusRecord(matchId);
         playerStatsRecorder.savePlayerStats(GameServiceImpl.getPlayingTeamsPlayers());
     }

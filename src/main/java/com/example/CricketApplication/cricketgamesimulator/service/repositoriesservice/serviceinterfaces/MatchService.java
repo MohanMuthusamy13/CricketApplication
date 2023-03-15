@@ -11,4 +11,5 @@ public interface MatchService {
     Match saveMatch(Match match);
     Match getMatchById(String matchId);
     Match updateMatch(String matchId, Match match);
+    List<Match> getMatchesByMatchFormat(String matchFormat);
 }

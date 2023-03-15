@@ -19,12 +19,12 @@ public class Match {
     @Id
     private String matchId;
 
-    @Field(type = FieldType.Keyword, name = "MatchFormat")
+    @Field(type = FieldType.Keyword, name = "match_format")
     private String matchFormat;
 
-    @Field(type = FieldType.Nested, name = "TeamsPlayed")
+    @Field(type = FieldType.Nested, name = "teams_played")
     private List<Team> teamsPlayed;
 
-    @Field(type = FieldType.Text, name = "MatchStatus")
+    @Field(type = FieldType.Text, name = "match_status")
     private String matchStatus;
 }
