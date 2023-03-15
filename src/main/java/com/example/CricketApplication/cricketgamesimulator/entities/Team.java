@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.List;
 
@@ -14,16 +16,16 @@ import java.util.List;
 @Document(indexName = "teams")
 public class Team {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "sequenceForTeams";
-
     @Id
-    private Long teamId;
+    private String teamId;
 
+    @Field(type = FieldType.Keyword, name = "TeamName")
     private String teamName;
 
+    @Field(type = FieldType.Integer, name = "MatchesPlayed")
     private int matchesPlayed;
 
+    @Field(type = FieldType.Nested, name = "Players")
     private List<Player> players;
 
 }

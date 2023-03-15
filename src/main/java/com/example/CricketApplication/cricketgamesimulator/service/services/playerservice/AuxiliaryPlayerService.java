@@ -2,8 +2,8 @@ package com.example.CricketApplication.cricketgamesimulator.service.services.pla
 
 import com.example.CricketApplication.cricketgamesimulator.entities.Team;
 import com.example.CricketApplication.cricketgamesimulator.entities.builders.ScoreRecordBuilder;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation.MatchServiceImpl;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation.ScoreRecorderServiceImpl;
+import com.example.CricketApplication.cricketgamesimulator.service.serviceImpl.MatchServiceImpl;
+import com.example.CricketApplication.cricketgamesimulator.service.serviceImpl.ScoreRecorderImpl;
 import com.example.CricketApplication.cricketgamesimulator.service.services.MatchRecordStatusService;
 import com.example.CricketApplication.cricketgamesimulator.service.services.majorgameservice.GameServiceImpl;
 import com.example.CricketApplication.cricketgamesimulator.service.services.matchformatservice.MatchFormatService;
@@ -35,7 +35,7 @@ public class AuxiliaryPlayerService {
     ScoreRecordBuilder scoreRecordBuilder;
 
     @Autowired
-    ScoreRecorderServiceImpl scoreRecorderRepositoryService;
+    ScoreRecorderImpl scoreRecorderRepositoryService;
 
     @Autowired
     PlayerStatsRecorder playerStatsRecorder;
@@ -50,10 +50,10 @@ public class AuxiliaryPlayerService {
         GameServiceImpl.getBowlingPlayer().setActiveStatus("active");
     }
 
-    public void playingTeamPlayersProvider(long matchId) throws Exception {
+    public void playingTeamPlayersProvider(String matchId) throws Exception {
         GameServiceImpl.setMatchTeams(matchRepositoryService.getMatchById(matchId));
         GameServiceImpl.setPlayingTeams(new ArrayList<>());
-        List<Team> playingTeams =  GameServiceImpl.getMatchTeams().getTeamsPlayed();
+        List<Team> playingTeams = GameServiceImpl.getMatchTeams().getTeamsPlayed();
         GameServiceImpl.setTempMatchId(matchId);
         GameServiceImpl.setTeams(teamSelectorService.teamSelector(
                 playingTeams.get(Constants.FIRST_TEAM).getTeamId(),
@@ -67,7 +67,7 @@ public class AuxiliaryPlayerService {
         );
     }
 
-    public void updateStatsAndScores(long matchId) throws Exception {
+    public void updateStatsAndScores(String matchId) throws Exception {
         GameServiceImpl.getMatchTeams().setTeamsPlayed(GameServiceImpl.getTeams());
         GameServiceImpl.getMatchTeams().setMatchFormat(MatchFormatService.getPlannedMatchFormat());
         PlayerCenturyAndHalfCenturyService.centuryStatsProvider(GameServiceImpl.getPlayingTeamsPlayers());
@@ -91,7 +91,7 @@ public class AuxiliaryPlayerService {
                         GameServiceImpl.getBowlingPlayer()
                 )
         );
-    }
+}
 
 
 

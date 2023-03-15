@@ -17,7 +17,7 @@ public class GameController {
 
     @GetMapping("/startMatch")
     public ResponseEntity<String> startMatch(
-            @RequestParam(value = "matchId") long matchId,
+            @RequestParam(value = "matchId") String matchId,
             @RequestParam(value = "matchFormat") String matchFormat
     ) throws Exception {
         String format = MatchFormatService.matchFormatScheduler(matchFormat);

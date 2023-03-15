@@ -7,10 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
 
 import java.util.Map;
 
@@ -18,20 +17,19 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(indexName = "matchStatus")
+@Document(indexName = "match_status")
 public class MatchStatusRecord {
-    public static final String SEQUENCE_NAME = "matchStatusRecorderSeq";
 
     @Id
-    private long matchStatusRecordId;
+    private String matchStatusRecordId;
 
-    private long matchId;
+    @Field(type = FieldType.Keyword, name = "MatchId")
+    private String matchId;
 
-    private Map<Long, Integer> scoreOfBothTeams;
+    @Field(type = FieldType.Object, name = "Score Of Teams")
+    private Map<String, Integer> scoreOfBothTeams;
 
+    @Field(type = FieldType.Text, name = "MatchStatus")
     private String matchStatus;
 
-    private PlayerStatsStructure maxScorer;
-
-    private PlayerStatsStructure maxWicketTaker;
 }

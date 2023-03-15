@@ -2,8 +2,7 @@ package com.example.CricketApplication.cricketgamesimulator.entities.factories;
 
 import com.example.CricketApplication.cricketgamesimulator.entities.Player;
 import com.example.CricketApplication.cricketgamesimulator.entities.Team;
-import com.example.CricketApplication.cricketgamesimulator.service.auxillaryservices.SequenceGeneratorService;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation.PlayerServiceImpl;
+import com.example.CricketApplication.cricketgamesimulator.service.serviceImpl.PlayerServiceImpl;
 import com.example.CricketApplication.cricketgamesimulator.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,18 +10,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlayerFactory {
 
-    private SequenceGeneratorService sequenceGeneratorService;
     @Autowired
     private PlayerServiceImpl playerRepositoryService;
 
-    @Autowired
-    public PlayerFactory(SequenceGeneratorService sequenceGeneratorService) {
-        this.sequenceGeneratorService = sequenceGeneratorService;
-    }
+
 
     public Player createBatsmanWithInitialConditions(String playerName, String teamName, Team team) {
         Player player = new Player(
-                sequenceGeneratorService.getSequenceNumber(Player.SEQUENCE_NAME),
                 playerName,
                 Constants.INITIAL_SCORE,
                 Constants.INITIAL_BALL_FACED_COUNT,
@@ -41,7 +35,6 @@ public class PlayerFactory {
 
     public Player createBowlerWithInitialConditions(String playerName, String teamName, Team team) {
         Player player = new Player(
-                sequenceGeneratorService.getSequenceNumber(Player.SEQUENCE_NAME),
                 playerName,
                 Constants.INITIAL_SCORE,
                 Constants.INITIAL_BALL_FACED_COUNT,

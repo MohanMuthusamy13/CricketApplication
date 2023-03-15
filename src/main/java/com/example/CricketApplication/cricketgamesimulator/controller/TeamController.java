@@ -2,7 +2,7 @@ package com.example.CricketApplication.cricketgamesimulator.controller;
 
 import com.example.CricketApplication.cricketgamesimulator.entities.Team;
 import com.example.CricketApplication.cricketgamesimulator.entities.builders.TeamBuilder;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation.TeamServiceImpl;
+import com.example.CricketApplication.cricketgamesimulator.service.serviceImpl.TeamServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class TeamController {
 
     @GetMapping("/getTeamById")
     public ResponseEntity<Team> getTeamById(
-            @RequestParam(value = "id") Long id
+            @RequestParam(value = "id") String id
     ) throws IOException {
         return new ResponseEntity<>(teamRepositoryService.getTeamById(id), HttpStatus.OK);
     }
@@ -42,7 +42,7 @@ public class TeamController {
 
     @PutMapping("/updateTeam")
     public ResponseEntity<Team> updateTeam(
-            @RequestParam(value = "id") Long id,
+            @RequestParam(value = "id") String id,
             @RequestBody Team team
     ) throws Exception {
         return new ResponseEntity<>(teamRepositoryService.updateTeam(id, team), HttpStatus.OK);
@@ -51,7 +51,7 @@ public class TeamController {
 
     @DeleteMapping("/deleteTeam")
     public ResponseEntity<HttpStatus> deleteTeam(
-            @RequestParam(value = "id") Long id
+            @RequestParam(value = "id") String id
     ) {
         teamRepositoryService.deleteTeam(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

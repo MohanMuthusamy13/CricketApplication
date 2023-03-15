@@ -1,4 +1,4 @@
-package com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation;
+package com.example.CricketApplication.cricketgamesimulator.service.serviceImpl;
 
 import com.example.CricketApplication.cricketgamesimulator.entities.ScoreRecord;
 import com.example.CricketApplication.cricketgamesimulator.repositories.ScoreRecorderRepository;
@@ -6,30 +6,18 @@ import com.example.CricketApplication.cricketgamesimulator.service.repositoriess
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class ScoreRecorderServiceImpl implements ScoreRecorderService {
+public class ScoreRecorderImpl implements ScoreRecorderService {
 
     private ScoreRecorderRepository scoreRecorderRepository;
 
     @Autowired
-    public ScoreRecorderServiceImpl(ScoreRecorderRepository scoreRecorderRepository) {
+    public ScoreRecorderImpl(ScoreRecorderRepository scoreRecorderRepository) {
         this.scoreRecorderRepository = scoreRecorderRepository;
     }
 
     @Override
     public ScoreRecord saveScoreRecordPerBall(ScoreRecord scoreRecorder) {
         return scoreRecorderRepository.save(scoreRecorder);
-    }
-
-    @Override
-    public List<ScoreRecord> getStatsOnParticularBall(long matchId, String over) {
-        return scoreRecorderRepository.getStatsOnParticularBall(matchId, over);
-    }
-
-    @Override
-    public List<ScoreRecord> getStatsOnParticularBallAndInnings(long matchId, String over, int innings) {
-        return scoreRecorderRepository.getStatsOnParticularBallAndInnings(matchId, over, innings);
     }
 }

@@ -49,7 +49,7 @@ public class GameServiceImpl implements GameService {
     @Setter
     private static int wickets;
     @Getter @Setter
-    private static long tempMatchId;
+    private static String tempMatchId;
     @Getter @Setter
     private static int runsScorePerBall;
     @Getter @Setter
@@ -172,7 +172,7 @@ public class GameServiceImpl implements GameService {
         auxiliaryPlayerService.saveScoreRecord(runsScorePerBall);
     }
 
-    public String startGame(long matchId) throws Exception {
+    public String startGame(String matchId) throws Exception {
         auxiliaryPlayerService.playingTeamPlayersProvider(matchId);
         TossService.startTossing();
         AuxiliaryPlayerService.setActiveStatusForPlayers();

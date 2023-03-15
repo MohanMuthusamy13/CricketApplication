@@ -1,13 +1,14 @@
-package com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation;
+package com.example.CricketApplication.cricketgamesimulator.service.serviceImpl;
 
 import com.example.CricketApplication.cricketgamesimulator.entities.Team;
+import com.example.CricketApplication.cricketgamesimulator.entities.builders.TeamBuilder;
 import com.example.CricketApplication.cricketgamesimulator.exceptionhandler.NotFoundException;
 import com.example.CricketApplication.cricketgamesimulator.repositories.TeamRepository;
-import com.example.CricketApplication.cricketgamesimulator.entities.builders.TeamBuilder;
 import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceinterfaces.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,14 +24,19 @@ public class TeamServiceImpl implements TeamService {
     }
     @Override
     public List<Team> getAllTeams() {
-        return teamRepository.findAll();
+        List<Team> teams = new ArrayList<>();
+        Iterable<Team> teamIterable =  teamRepository.findAll();
+        for (Team team : teamIterable) {
+            teams.add(team);
+        }
+        return teams;
     }
 
     public Team saveTeam(Team team) {
         return teamRepository.save(team);
     }
 
-    public Team getTeamById(long id) {
+    public Team getTeamById(String id) {
         Team team = teamRepository.findById(id).orElse(null);
         if (team == null){
             throw new NotFoundException("Please enter the valid ID");
@@ -38,7 +44,7 @@ public class TeamServiceImpl implements TeamService {
         return team;
     }
 
-    public Team updateTeam(Long id, Team updatedTeam) {
+    public Team updateTeam(String id, Team updatedTeam) {
         Team team = teamRepository.findById(id).orElse(null);
 
         if (team == null) {
@@ -53,7 +59,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public void deleteTeam(Long id) {
+    public void deleteTeam(String id) {
         teamRepository.deleteById(id);
     }
 }

@@ -8,13 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ScoreRecorderRepository extends ElasticsearchRepository<ScoreRecord, Long> {
+public interface ScoreRecorderRepository extends ElasticsearchRepository<ScoreRecord, String> {
 
-//    @Query(value = "{\"matchId\" : ?0, \"overCount\" : \"?1\"}}")
-    List<ScoreRecord> getStatsOnParticularBall(long matchId, String over);
 
-//    @Query(value = "{\"matchId\" : ?0, \"overCount\" : \"?1\", \"innings\" : ?2}")
-    List<ScoreRecord> getStatsOnParticularBallAndInnings(long matchId,
-                                                   String over, int innings);
 
 }

@@ -2,14 +2,13 @@ package com.example.CricketApplication.cricketgamesimulator.controller;
 
 import com.example.CricketApplication.cricketgamesimulator.entities.Match;
 import com.example.CricketApplication.cricketgamesimulator.entities.builders.MatchBuilder;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation.MatchServiceImpl;
+import com.example.CricketApplication.cricketgamesimulator.service.serviceImpl.MatchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/cricketGame/match")
@@ -23,35 +22,17 @@ public class MatchController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Match> getMatchById(
-            @PathVariable(value = "id") Long id
+            @PathVariable(value = "id") String id
     ) throws Exception {
         return new ResponseEntity<>(
                 matchRepositoryService.getMatchById(id),
                 HttpStatus.OK);
     }
 
-    @GetMapping("/getMatchesPlayedByTeamName")
-    public ResponseEntity<List<Match>> getMatchesPlayedByTeamName(
-            @RequestParam(value = "teamName") String teamName
-    ) {
-        return new ResponseEntity<>(
-                matchRepositoryService.getMatchesPlayedByTeamName(teamName),
-                HttpStatus.OK);
-    }
-
-    @GetMapping("/getMatchesCountPlayedByTeamName")
-    public ResponseEntity<Integer> getMatchesCountPlayedByTeamName(
-            @RequestParam(value = "teamName") String teamName
-    ) {
-        return new ResponseEntity<>(
-                matchRepositoryService.getMatchesCountPlayedByTeamName(teamName),
-                HttpStatus.OK);
-    }
-
     @PostMapping("/createMatch")
     public ResponseEntity<Match> createMatch(
-            @RequestParam(value = "id1") long teamId1,
-            @RequestParam(value = "id2") long teamId2,
+            @RequestParam(value = "id1") String teamId1,
+            @RequestParam(value = "id2") String teamId2,
             @RequestParam(value = "format") String format
     ) throws IOException {
 
