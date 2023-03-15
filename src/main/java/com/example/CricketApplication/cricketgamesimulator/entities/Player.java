@@ -2,12 +2,10 @@ package com.example.CricketApplication.cricketgamesimulator.entities;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document("PlayerStats")
+
+@Document(indexName = "playerStats")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +16,6 @@ public class Player {
     @Id
     private Long id;
 
-    @Indexed
     private String name;
 
     private int score;
