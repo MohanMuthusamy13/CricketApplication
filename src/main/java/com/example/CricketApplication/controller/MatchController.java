@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cricketGame/match")
+@RequestMapping("/cricket-game/match")
 public class MatchController {
 
     private final MatchService matchService;
@@ -34,25 +34,25 @@ public class MatchController {
                 HttpStatus.OK);
     }
 
-    @GetMapping("/getMatchesPlayedByTeamName")
+    @GetMapping("/matches-by-team-name")
     public ResponseEntity<List<Match>> getMatchesPlayedByTeamName(
-            @RequestParam(value = "teamName") String teamName
+            @RequestParam(value = "name") String teamName
     ) {
         return new ResponseEntity<>(
                 matchService.getMatchesPlayedByTeamName(teamName),
                 HttpStatus.OK);
     }
 
-    @GetMapping("/getMatchesCountPlayedByTeamName")
+    @GetMapping("/matches-count-by-team-name")
     public ResponseEntity<Integer> getMatchesCountPlayedByTeamName(
-            @RequestParam(value = "teamName") String teamName
+            @RequestParam(value = "name") String teamName
     ) {
         return new ResponseEntity<>(
                 matchService.getMatchesCountPlayedByTeamName(teamName),
                 HttpStatus.OK);
     }
 
-    @PostMapping("/createMatch")
+    @PostMapping("/create-match")
     public ResponseEntity<Match> createMatch(
             @RequestParam(value = "id1") long teamId1,
             @RequestParam(value = "id2") long teamId2,

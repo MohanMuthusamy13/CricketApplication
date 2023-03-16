@@ -1,4 +1,4 @@
-package com.example.CricketApplication.service.auxilaryservices.teamservices;
+package com.example.CricketApplication.service.auxilaryservices.majorgameservice;
 
 import com.example.CricketApplication.entities.Team;
 import com.example.CricketApplication.service.serviceimplementation.TeamServiceImpl;

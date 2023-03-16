@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/cricketGame/stats")
+@RequestMapping("/cricket-game/stats")
 public class MatchStatisticsController {
 
     private final PlayerService playerService;
@@ -24,28 +24,28 @@ public class MatchStatisticsController {
         this.playerService = playerService;
     }
 
-    @GetMapping("/maxOverallScorer")
+    @GetMapping("/max-overall-scorer")
     public ResponseEntity<Player> getOverallMaxScorer() {
         return new ResponseEntity<>(
                 playerService.getOverAllMaxScorer(),
                 HttpStatus.OK);
     }
 
-    @GetMapping("/maxWicketTaker")
+    @GetMapping("/max-wicket-taker")
     public ResponseEntity<Player> getMaxWicketTaker() {
         return new ResponseEntity<>(
                 playerService.getOverallMaxWicketTaker(),
                 HttpStatus.OK);
     }
 
-    @GetMapping("/maxBoundariesHitter")
+    @GetMapping("/max-boundaries-hitter")
     public ResponseEntity<Player> getMaxBoundariesHitter() {
         return new ResponseEntity<>(
                 playerService.getMaxBoundariesHitter(),
                 HttpStatus.OK);
     }
 
-    @GetMapping("/maxSixesHitter")
+    @GetMapping("/max-sixes-hitter")
     public ResponseEntity<Player> getMaxSixesHitter() {
         return new ResponseEntity<>(
                 playerService.getMaxSixesHitter(),

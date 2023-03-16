@@ -1,9 +1,7 @@
 package com.example.CricketApplication.service.auxilaryservices.balltrackerservice;
 
-import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WicketStatusProvider;
 import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.ScoreService;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameServiceImpl;
-import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
 import com.example.CricketApplication.utils.Constants;
 
 public class WinningStatusProvider {
@@ -22,9 +20,9 @@ public class WinningStatusProvider {
     }
 
     public String checkWinningStatusForSecondInnings() {
-        if ((GameServiceImpl.getInnings() == Constants.SECOND_INNINGS)
-                && ((GameServiceImpl.getScoreTeams()[GameServiceImpl.getBatting()] >
-                GameServiceImpl.getScoreTeams()[Math.abs(1 - GameServiceImpl.getBatting())]))){
+        if ((GameService.getInnings() == Constants.SECOND_INNINGS)
+                && ((GameService.getScoreTeams()[GameService.getBatting()] >
+                GameService.getScoreTeams()[Math.abs(1 - GameService.getBatting())]))){
             return "Current Team Wins";
         }
         else if (WicketStatusProvider.isAllWicketsDownInSecondInnings()) {
@@ -38,20 +36,20 @@ public class WinningStatusProvider {
     }
 
     public static int winningRunsDifference() {
-        return GameServiceImpl.getScoreTeams()[Math.abs(1 - GameServiceImpl.getBatting())] -
-                GameServiceImpl.getScoreTeams()[GameServiceImpl.getBatting()];
+        return GameService.getScoreTeams()[Math.abs(1 - GameService.getBatting())] -
+                GameService.getScoreTeams()[GameService.getBatting()];
     }
 
     public static String diffProvider(int winningTeam) {
         String diffReveler = "";
-        if (GameServiceImpl
+        if (GameService
                 .getFlagForTeamWinningIndicationOnSecondInnings().equals("Current Team Wins")) {
             diffReveler = String.format(
                     "Team %d won by %d wickets"
                     , winningTeam, winningWicketsDifference()
             );
         }
-        else if (GameServiceImpl
+        else if (GameService
                 .getFlagForTeamWinningIndicationOnSecondInnings().equals("Current Team Loses")){
             diffReveler = String.format(
                     "Team %d won by %d runs"
@@ -63,7 +61,7 @@ public class WinningStatusProvider {
 
 
     public byte checkWinningStatusNumber() {
-        if ((OverService.getOverCount() == GameServiceImpl.getTotalOvers()) || (GameServiceImpl.getFlagForTeamWinningIndicationOnSecondInnings().equals("Game Over"))) {
+        if ((OverService.getOverCount() == GameService.getTotalOvers()) || (GameService.getFlagForTeamWinningIndicationOnSecondInnings().equals("Game Over"))) {
             if (checkWinningTeamCondition() == Constants.FIRST_TEAM_WINNING_INDICATION) {
                 return Constants.FIRST_TEAM_WINNING_INDICATION;
             }
@@ -77,12 +75,12 @@ public class WinningStatusProvider {
     public void checkWinningStatus() {
         if (checkWinningStatusNumber() == Constants.FIRST_TEAM_WINNING_INDICATION) {
             System.out.println("The Game is over :)"+ "\n" +"Team 1 Wins");
-            System.out.println(GameServiceImpl.getFlagForTeamWinningIndicationOnSecondInnings());
+            System.out.println(GameService.getFlagForTeamWinningIndicationOnSecondInnings());
             System.out.println(diffProvider(1));
         } else if (checkWinningStatusNumber() == Constants.SECOND_TEAM_WINNING_INDICATION) {
             System.out.println("The Game is over :)"+ "\n" +"Team 2 Wins");
             System.out.println(diffProvider(2));
-            System.out.println(GameServiceImpl.getFlagForTeamWinningIndicationOnSecondInnings());
+            System.out.println(GameService.getFlagForTeamWinningIndicationOnSecondInnings());
         }
         else {
             System.out.println("The Game is over :)" + "\n" +"Game is drawn");

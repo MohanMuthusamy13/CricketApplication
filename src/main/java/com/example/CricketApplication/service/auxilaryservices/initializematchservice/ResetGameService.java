@@ -1,7 +1,7 @@
-package com.example.CricketApplication.service.auxilaryservices.resetgameservice;
+package com.example.CricketApplication.service.auxilaryservices.initializematchservice;
 
 import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.ScoreService;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameServiceImpl;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.IllegalBallTrackerService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WicketStatusProvider;
@@ -10,19 +10,19 @@ import com.example.CricketApplication.utils.Constants;
 public class ResetGameService {
 
     public static void setToInitialState() {
-        GameServiceImpl.setBatting(Constants.INITIAL_STATE);
-        GameServiceImpl.setBowling(Constants.INITIAL_STATE);
-        GameServiceImpl.setInnings(Constants.FIRST_INNINGS);
-        GameServiceImpl.setCurrentBatter(Constants.FIRST_BATTER_IN_TEAM);
-        GameServiceImpl.setCurrentBowler(Constants.FIRST_BOWLER_IN_TEAM);
-        GameServiceImpl.setWickets(Constants.INITIAL_WICKETS_TAKEN);
+        GameService.setBatting(Constants.INITIAL_STATE);
+        GameService.setBowling(Constants.INITIAL_STATE);
+        GameService.setInnings(Constants.FIRST_INNINGS);
+        GameService.setCurrentBatter(Constants.FIRST_BATTER_IN_TEAM);
+        GameService.setCurrentBowler(Constants.FIRST_BOWLER_IN_TEAM);
+        GameService.setWickets(Constants.INITIAL_WICKETS_TAKEN);
     }
 
     public static void resetGame() {
 
         setToInitialState();
-        GameServiceImpl.setFlagForTeamWinningIndicationOnSecondInnings("");
-        GameServiceImpl.setScoreTeams(new int[2]);
+        GameService.setFlagForTeamWinningIndicationOnSecondInnings("");
+        GameService.setScoreTeams(new int[2]);
 
         ScoreService.setScoreOfBothTeams(new int[2]);
 

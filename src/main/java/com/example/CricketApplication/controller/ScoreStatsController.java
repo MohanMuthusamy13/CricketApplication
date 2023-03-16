@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("cricketGame/scoreStats")
+@RequestMapping("cricket-game/score-stats")
 public class ScoreStatsController {
 
     private final ScoreRecorderService scoreRecorderService;
@@ -20,9 +20,9 @@ public class ScoreStatsController {
         this.scoreRecorderService = scoreRecorderService;
     }
 
-    @GetMapping("/compareStats")
+    @GetMapping("/compare-stats/{id}")
     public ResponseEntity<List<ScoreRecord>> getScoreStatOnParticularBall(
-            @RequestParam(value = "id") long matchId,
+            @PathVariable(value = "id") long matchId,
             @RequestParam(value = "over") String over
     ) {
         return new ResponseEntity<>(
@@ -31,9 +31,9 @@ public class ScoreStatsController {
         );
     }
 
-    @GetMapping("/getStatsParticularBall")
+    @GetMapping("/stats-particular-ball/{id}")
     public ResponseEntity<List<ScoreRecord>> getStatsOnParticularBallAndInnings(
-            @RequestParam(value = "id") long matchId,
+            @PathVariable(value = "id") long matchId,
             @RequestParam(value = "over") String over,
             @RequestParam(value = "innings") int innings
     ) {

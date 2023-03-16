@@ -4,12 +4,12 @@ import com.example.CricketApplication.entities.Team;
 import com.example.CricketApplication.service.serviceimplementation.MatchServiceImpl;
 import com.example.CricketApplication.service.serviceimplementation.ScoreRecorderServiceImpl;
 import com.example.CricketApplication.service.auxilaryservices.initializematchservice.MatchRecordStatusService;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameServiceImpl;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
 import com.example.CricketApplication.service.auxilaryservices.initializematchservice.MatchFormatService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
 import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.PlayerCenturyAndHalfCenturyService;
 import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.ScoreService;
-import com.example.CricketApplication.service.auxilaryservices.teamservices.TeamSelectorService;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.TeamSelectorService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WicketStatusProvider;
 import com.example.CricketApplication.utils.builders.ScoreRecordBuilder;
 import com.example.CricketApplication.utils.Constants;
@@ -41,39 +41,39 @@ public class AuxiliaryPlayerService {
     PlayerStatsRecorder playerStatsRecorder;
 
     public static void addScoreToBatter(int runsScorePerBall) {
-        GameServiceImpl.getBattingPlayer().setScore(runsScorePerBall);
-        GameServiceImpl.getBattingPlayer().setBallsFaced(1);
+        GameService.getBattingPlayer().setScore(runsScorePerBall);
+        GameService.getBattingPlayer().setBallsFaced(1);
     }
 
     public static void setActiveStatusForPlayers() {
-        GameServiceImpl.getBattingPlayer().setActiveStatus("active");
-        GameServiceImpl.getBowlingPlayer().setActiveStatus("active");
+        GameService.getBattingPlayer().setActiveStatus("active");
+        GameService.getBowlingPlayer().setActiveStatus("active");
     }
 
     public void playingTeamPlayersProvider(long matchId) throws Exception {
-        GameServiceImpl.setMatchTeams(matchRepositoryService.getMatchById(matchId));
-        GameServiceImpl.setPlayingTeams(new ArrayList<>());
-        List<Team> playingTeams =  GameServiceImpl.getMatchTeams().getTeamsPlayed();
-        GameServiceImpl.setTempMatchId(matchId);
-        GameServiceImpl.setTeams(teamSelectorService.teamSelector(
+        GameService.setMatchTeams(matchRepositoryService.getMatchById(matchId));
+        GameService.setPlayingTeams(new ArrayList<>());
+        List<Team> playingTeams =  GameService.getMatchTeams().getTeamsPlayed();
+        GameService.setTempMatchId(matchId);
+        GameService.setTeams(teamSelectorService.teamSelector(
                 playingTeams.get(Constants.FIRST_TEAM).getTeamId(),
                 playingTeams.get(Constants.SECOND_TEAM).getTeamId()
         ));
-        GameServiceImpl.setPlayingTeamsPlayers(
+        GameService.setPlayingTeamsPlayers(
                 List.of(
-                        GameServiceImpl.getTeams().get(Constants.FIRST_TEAM).getPlayers(),
-                        GameServiceImpl.getTeams().get(Constants.SECOND_TEAM).getPlayers()
+                        GameService.getTeams().get(Constants.FIRST_TEAM).getPlayers(),
+                        GameService.getTeams().get(Constants.SECOND_TEAM).getPlayers()
                 )
         );
     }
 
     public void updateStatsAndScores(long matchId) throws Exception {
-        GameServiceImpl.getMatchTeams().setTeamsPlayed(GameServiceImpl.getTeams());
-        GameServiceImpl.getMatchTeams().setMatchFormat(MatchFormatService.getPlannedMatchFormat());
-        PlayerCenturyAndHalfCenturyService.centuryStatsProvider(GameServiceImpl.getPlayingTeamsPlayers());
-        matchRepositoryService.updateMatch(matchId, GameServiceImpl.getMatchTeams());
+        GameService.getMatchTeams().setTeamsPlayed(GameService.getTeams());
+        GameService.getMatchTeams().setMatchFormat(MatchFormatService.getPlannedMatchFormat());
+        PlayerCenturyAndHalfCenturyService.centuryStatsProvider(GameService.getPlayingTeamsPlayers());
+        matchRepositoryService.updateMatch(matchId, GameService.getMatchTeams());
         statusService.saveMatchStatusRecord(matchId);
-        playerStatsRecorder.savePlayerStats(GameServiceImpl.getPlayingTeamsPlayers());
+        playerStatsRecorder.savePlayerStats(GameService.getPlayingTeamsPlayers());
     }
 
     public void saveScoreRecord(int runsScorePerBall) {
@@ -81,14 +81,14 @@ public class AuxiliaryPlayerService {
 
         scoreRecorderRepositoryService.saveScoreRecordPerBall(
                 scoreRecordBuilder.build(
-                        GameServiceImpl.getTempMatchId(),
+                        GameService.getTempMatchId(),
                         overCount,
                         scoreBoardDisplay.runsForDisplayProvider(runsScorePerBall),
-                        GameServiceImpl.getInnings(),
-                        ScoreService.getScoreOfBothTeams()[GameServiceImpl.getBatting()],
+                        GameService.getInnings(),
+                        ScoreService.getScoreOfBothTeams()[GameService.getBatting()],
                         WicketStatusProvider.getWicketLose(),
-                        GameServiceImpl.getBattingPlayer(),
-                        GameServiceImpl.getBowlingPlayer()
+                        GameService.getBattingPlayer(),
+                        GameService.getBowlingPlayer()
                 )
         );
     }

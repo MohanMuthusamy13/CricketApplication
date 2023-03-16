@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/cricketGame/display")
+@RequestMapping("/cricket-game/display")
 public class ScoreBoardDisplayController {
 
     private final MatchStatusService matchStatusService;
@@ -22,7 +22,7 @@ public class ScoreBoardDisplayController {
         this.matchStatusService = matchStatusService;
     }
 
-    @GetMapping("/getMatchStatusRecord/{id}")
+    @GetMapping("/match-status-record/{id}")
     public ResponseEntity<MatchStatusRecord> getMatchStatusRecord(
             @PathVariable(value = "id") long matchId
     ) {
@@ -32,7 +32,7 @@ public class ScoreBoardDisplayController {
         );
     }
 
-    @GetMapping("/getMatchStatus/{id}")
+    @GetMapping("/match-status/{id}")
     public ResponseEntity<String> getMatchStatus(
             @PathVariable(value = "id") long matchId
     ) {

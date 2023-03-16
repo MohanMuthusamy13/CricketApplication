@@ -2,7 +2,7 @@ package com.example.CricketApplication.service.auxilaryservices.initializematchs
 
 
 import com.example.CricketApplication.enums.Toss;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameServiceImpl;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
 import com.example.CricketApplication.utils.Constants;
 import com.example.CricketApplication.view.TossDisplay;
 
@@ -21,12 +21,12 @@ public class TossService {
         int teamSelected = tossWinner.getBattingOrderIndicator();
         TossDisplay.tossDisplayed(teamSelected);
         if (teamSelected == 0) {
-            GameServiceImpl.setBatting(Constants.SECOND_TEAM);
-            GameServiceImpl.setBowling(Constants.FIRST_TEAM);
+            GameService.setBatting(Constants.SECOND_TEAM);
+            GameService.setBowling(Constants.FIRST_TEAM);
         }
         else {
-            GameServiceImpl.setBatting(Constants.FIRST_TEAM);
-            GameServiceImpl.setBowling(Constants.SECOND_TEAM);
+            GameService.setBatting(Constants.FIRST_TEAM);
+            GameService.setBowling(Constants.SECOND_TEAM);
         }
     }
 }

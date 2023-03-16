@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cricketGame")
+@RequestMapping("/cricket-game")
 public class TeamController {
 
     @Autowired
@@ -25,38 +25,38 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @GetMapping("/getAllTeams")
+    @GetMapping("/teams")
     public ResponseEntity<List<Team>> getALlTeams() {
         return new ResponseEntity<>(teamService.getAllTeams(), HttpStatus.OK);
     }
 
-    @GetMapping("/getTeamById")
+    @GetMapping("/team/{id}")
     public ResponseEntity<Team> getTeamById(
-            @RequestParam(value = "id") Long id
+            @PathVariable Long id
     ) throws IOException {
         return new ResponseEntity<>(teamService.getTeamById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/createTeam")
+    @PostMapping("/create-team")
     public ResponseEntity<Team> createTeam(
-            @RequestParam(value = "teamName") String teamName
+            @RequestParam(value = "name") String teamName
     ) {
         Team team = teamBuilder.build(teamName);
         return new ResponseEntity<>(teamService.saveTeam(team), HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateTeam")
+    @PutMapping("/update-team/{id}")
     public ResponseEntity<Team> updateTeam(
-            @RequestParam(value = "id") Long id,
+            @PathVariable Long id,
             @RequestBody Team team
     ) throws Exception {
         return new ResponseEntity<>(teamService.updateTeam(id, team), HttpStatus.OK);
 
     }
 
-    @DeleteMapping("/deleteTeam")
+    @DeleteMapping("/delete-team/{id}")
     public ResponseEntity<HttpStatus> deleteTeam(
-            @RequestParam(value = "id") Long id
+            @PathVariable Long id
     ) {
         teamService.deleteTeam(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

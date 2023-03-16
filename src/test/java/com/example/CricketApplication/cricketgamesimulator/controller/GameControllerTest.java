@@ -1,7 +1,7 @@
 package com.example.CricketApplication.cricketgamesimulator.controller;
 
 import com.example.CricketApplication.controller.GameController;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameServiceImpl;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ class GameControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private GameServiceImpl cricket;
+    private GameService cricket;
 
     @InjectMocks
     private GameController gameController;
