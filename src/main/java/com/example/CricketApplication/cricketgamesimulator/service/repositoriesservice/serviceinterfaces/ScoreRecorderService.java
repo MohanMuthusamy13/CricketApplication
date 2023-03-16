@@ -9,4 +9,6 @@ import java.util.List;
 public interface ScoreRecorderService {
     ScoreRecord saveScoreRecordPerBall(ScoreRecord scoreRecorder);
 
+    ScoreRecord getBallOutcome(String matchId, String overCount, int innings);
+    List<ScoreRecord> getStatsOnParticularBall(String matchId, String over);
 }

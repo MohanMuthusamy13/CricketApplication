@@ -6,6 +6,8 @@ import com.example.CricketApplication.cricketgamesimulator.service.repositoriess
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ScoreRecorderImpl implements ScoreRecorderService {
 
@@ -19,5 +21,15 @@ public class ScoreRecorderImpl implements ScoreRecorderService {
     @Override
     public ScoreRecord saveScoreRecordPerBall(ScoreRecord scoreRecorder) {
         return scoreRecorderRepository.save(scoreRecorder);
+    }
+
+    @Override
+    public ScoreRecord getBallOutcome(String matchId, String overCount, int innings) {
+        return scoreRecorderRepository.getBallOutcome(matchId, overCount, innings);
+    }
+
+    @Override
+    public List<ScoreRecord> getStatsOnParticularBall(String matchId, String over) {
+        return scoreRecorderRepository.getStatsOnParticularBallOnBothInnings(matchId, over);
     }
 }
