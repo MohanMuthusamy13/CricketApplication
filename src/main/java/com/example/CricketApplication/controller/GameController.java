@@ -24,8 +24,8 @@ public class GameController {
             @RequestParam(value = "id") long matchId,
             @RequestParam(value = "format") String matchFormat
     ) throws Exception {
-        String format = MatchFormatService.matchFormatScheduler(matchFormat);
-        String status = gameService.startGame(matchId);
+        MatchFormatService.matchFormatScheduler(matchFormat);
+        gameService.startGame(matchId);
         return new ResponseEntity<>("Match is completed", HttpStatus.OK);
     }
 
