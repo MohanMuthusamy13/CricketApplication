@@ -1,7 +1,7 @@
 package com.example.CricketApplication.controller;
 
 import com.example.CricketApplication.entities.ScoreRecord;
-import com.example.CricketApplication.service.repositoriesservice.serviceinterfaces.ScoreRecorderService;
+import com.example.CricketApplication.service.serviceinterfaces.ScoreRecorderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

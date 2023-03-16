@@ -2,7 +2,7 @@ package com.example.CricketApplication.utils.builders;
 
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.entities.ScoreRecord;
-import com.example.CricketApplication.service.auxillaryservices.SequenceGeneratorService;
+import com.example.CricketApplication.utils.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

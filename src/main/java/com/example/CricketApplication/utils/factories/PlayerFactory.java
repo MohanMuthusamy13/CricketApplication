@@ -2,8 +2,8 @@ package com.example.CricketApplication.utils.factories;
 
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.entities.Team;
-import com.example.CricketApplication.service.auxillaryservices.SequenceGeneratorService;
-import com.example.CricketApplication.service.repositoriesservice.serviceimplementation.PlayerServiceImpl;
+import com.example.CricketApplication.utils.SequenceGeneratorService;
+import com.example.CricketApplication.service.serviceimplementation.PlayerServiceImpl;
 import com.example.CricketApplication.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

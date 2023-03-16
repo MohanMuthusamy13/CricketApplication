@@ -3,8 +3,8 @@ package com.example.CricketApplication.cricketgamesimulator.service.repositories
 import com.example.CricketApplication.entities.Match;
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.entities.Team;
-import com.example.CricketApplication.repositories.MatchRepository;
-import com.example.CricketApplication.service.repositoriesservice.serviceimplementation.MatchServiceImpl;
+import com.example.CricketApplication.repositories.repositoryImpl.MatchRepositoryImpl;
+import com.example.CricketApplication.service.serviceimplementation.MatchServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MatchServiceImplTest {
 
     @Mock
-    private MatchRepository matchRepository;
+    private MatchRepositoryImpl matchRepository;
 
     @InjectMocks
     private MatchServiceImpl matchService;

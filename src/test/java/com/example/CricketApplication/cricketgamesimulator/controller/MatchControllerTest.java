@@ -5,7 +5,7 @@ import com.example.CricketApplication.entities.Match;
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.entities.Team;
 import com.example.CricketApplication.utils.builders.MatchBuilder;
-import com.example.CricketApplication.service.repositoriesservice.serviceimplementation.MatchServiceImpl;
+import com.example.CricketApplication.service.serviceimplementation.MatchServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.jupiter.api.BeforeEach;

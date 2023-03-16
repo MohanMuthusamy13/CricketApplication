@@ -1,12 +1,12 @@
 package com.example.CricketApplication.view;
 
-import com.example.CricketApplication.service.services.scoreservice.ScoreModel;
+import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.ScoreService;
 import com.example.CricketApplication.entities.Team;
 import org.springframework.stereotype.Component;
-import com.example.CricketApplication.service.services.majorgameservice.GameServiceImpl;
-import com.example.CricketApplication.service.services.overservice.OverService;
-import com.example.CricketApplication.service.services.windeclarativeservices.WicketStatusProvider;
-import com.example.CricketApplication.service.services.windeclarativeservices.WinningStatusProvider;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameServiceImpl;
+import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
+import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WicketStatusProvider;
+import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WinningStatusProvider;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class ScoreBoardDisplay {
 
                         %n""",
                 runsForDisplayProvider(GameServiceImpl.getRunsScorePerBall()),
-                OverService.getOverInString(), ScoreModel.getScoreOfBothTeams()[GameServiceImpl.getBatting()],
+                OverService.getOverInString(), ScoreService.getScoreOfBothTeams()[GameServiceImpl.getBatting()],
                 WicketStatusProvider.getWicketLose(),
                 GameServiceImpl.getBattingPlayer().getName(), GameServiceImpl.getBattingPlayer().getScore(),
                 GameServiceImpl.getBowlingPlayer().getName(), GameServiceImpl.getBowlingPlayer().getWicketsTaken()
@@ -87,20 +87,20 @@ public class ScoreBoardDisplay {
                         %s  : %d
                         """,
                 playingTeams.get(0).getTeamName(),
-                ScoreModel.getScoreOfBothTeams()[0],
+                ScoreService.getScoreOfBothTeams()[0],
                 playingTeams.get(1).getTeamName(),
-                ScoreModel.getScoreOfBothTeams()[1]);
+                ScoreService.getScoreOfBothTeams()[1]);
         System.out.println(result);
         return result;
     }
 
     public String getResults() {
         List<Team> playingTeams = GameServiceImpl.getTeams();
-        if (ScoreModel.getScoreOfBothTeams()[0] > ScoreModel.getScoreOfBothTeams()[1]) {
+        if (ScoreService.getScoreOfBothTeams()[0] > ScoreService.getScoreOfBothTeams()[1]) {
             String result = WinningStatusProvider.diffProvider(1);
             return String.format("%s Wins", playingTeams.get(0).getTeamName());
         }
-        else if (ScoreModel.getScoreOfBothTeams()[0] < ScoreModel.getScoreOfBothTeams()[1]) {
+        else if (ScoreService.getScoreOfBothTeams()[0] < ScoreService.getScoreOfBothTeams()[1]) {
             String result = WinningStatusProvider.diffProvider(2);
             return String.format("%s Wins", playingTeams.get(1).getTeamName());
         }

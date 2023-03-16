@@ -1,7 +1,7 @@
 package com.example.CricketApplication.controller;
 
 import com.example.CricketApplication.entities.Match;
-import com.example.CricketApplication.service.repositoriesservice.serviceinterfaces.MatchService;
+import com.example.CricketApplication.service.serviceinterfaces.MatchService;
 import com.example.CricketApplication.utils.builders.MatchBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

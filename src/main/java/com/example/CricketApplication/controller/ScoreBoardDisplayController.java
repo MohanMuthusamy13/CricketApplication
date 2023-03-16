@@ -2,7 +2,7 @@ package com.example.CricketApplication.controller;
 
 
 import com.example.CricketApplication.entities.MatchStatusRecord;
-import com.example.CricketApplication.service.repositoriesservice.serviceinterfaces.MatchStatusService;
+import com.example.CricketApplication.service.serviceinterfaces.MatchStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

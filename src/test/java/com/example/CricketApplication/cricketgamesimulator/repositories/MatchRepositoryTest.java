@@ -3,7 +3,7 @@ package com.example.CricketApplication.cricketgamesimulator.repositories;
 import com.example.CricketApplication.entities.Match;
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.entities.Team;
-import com.example.CricketApplication.repositories.MatchRepository;
+import com.example.CricketApplication.repositories.repositoryImpl.MatchRepositoryImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MatchRepositoryTest {
 
     @Autowired
-    private MatchRepository matchRepository;
+    private MatchRepositoryImpl matchRepository;
 
     Team team1 = Team.builder()
             .teamId(1L)

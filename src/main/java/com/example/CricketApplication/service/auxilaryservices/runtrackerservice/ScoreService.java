@@ -1,0 +1,35 @@
+package com.example.CricketApplication.service.auxilaryservices.runtrackerservice;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Component
+public class ScoreService {
+
+    @Getter
+    private int currentScore;
+    private int ballsTaken;
+    private int totalScore;
+    private static int[] scoreOfBothTeams = new int[2];
+
+    public int setCurrentScore(int currentScore) {
+        return currentScore;
+    }
+
+    public static int[] getScoreOfBothTeams() {
+        return scoreOfBothTeams;
+    }
+    public static void setScoreOfBothTeams(int[] scoreOfBothTeams) {
+        ScoreService.scoreOfBothTeams = scoreOfBothTeams;
+    }
+    public static void addScore(int current_team, int run) {
+        scoreOfBothTeams[current_team] += run;
+    }
+
+}

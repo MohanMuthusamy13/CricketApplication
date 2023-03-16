@@ -4,7 +4,7 @@ import com.example.CricketApplication.controller.TeamController;
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.entities.Team;
 import com.example.CricketApplication.utils.builders.TeamBuilder;
-import com.example.CricketApplication.service.repositoriesservice.serviceimplementation.TeamServiceImpl;
+import com.example.CricketApplication.service.serviceimplementation.TeamServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.jupiter.api.BeforeEach;
