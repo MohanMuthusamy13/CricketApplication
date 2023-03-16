@@ -98,11 +98,11 @@ public class ScoreBoardDisplay {
         List<Team> playingTeams = GameService.getTeams();
         if (ScoreService.getScoreOfBothTeams()[0] > ScoreService.getScoreOfBothTeams()[1]) {
             String result = WinningStatusProvider.diffProvider(1);
-            return String.format("%s Wins", playingTeams.get(0).getTeamName());
+            return String.format("%s won the match", playingTeams.get(0).getTeamName());
         }
         else if (ScoreService.getScoreOfBothTeams()[0] < ScoreService.getScoreOfBothTeams()[1]) {
             String result = WinningStatusProvider.diffProvider(2);
-            return String.format("%s Wins", playingTeams.get(1).getTeamName());
+            return String.format("%s won the match", playingTeams.get(1).getTeamName());
         }
         return "Draw";
     }

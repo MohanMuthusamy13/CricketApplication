@@ -56,6 +56,7 @@ public class WinningStatusProvider {
                    , winningTeam, winningRunsDifference()
             );
         }
+        System.out.println(diffReveler);
         return diffReveler;
     }
 
@@ -74,13 +75,20 @@ public class WinningStatusProvider {
 
     public void checkWinningStatus() {
         if (checkWinningStatusNumber() == Constants.FIRST_TEAM_WINNING_INDICATION) {
-            System.out.println("The Game is over :)"+ "\n" +"Team 1 Wins");
-            System.out.println(GameService.getFlagForTeamWinningIndicationOnSecondInnings());
             System.out.println(diffProvider(1));
+            System.out.print("""
+                            The Game is over :)
+                            Team 1 Wins
+                            """);
+            diffProvider(1);
         } else if (checkWinningStatusNumber() == Constants.SECOND_TEAM_WINNING_INDICATION) {
-            System.out.println("The Game is over :)"+ "\n" +"Team 2 Wins");
             System.out.println(diffProvider(2));
-            System.out.println(GameService.getFlagForTeamWinningIndicationOnSecondInnings());
+            System.out.print("""
+                            The Game is over :)
+                            Team 2 Wins
+                            """
+                    );
+            diffProvider(2);
         }
         else {
             System.out.println("The Game is over :)" + "\n" +"Game is drawn");

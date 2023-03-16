@@ -166,7 +166,8 @@ public class GameService {
 
         if (Innings == Constants.SECOND_INNINGS) {
             if (!checkWinning.checkWinningStatusForSecondInnings().equals("")){
-                flagForTeamWinningIndicationOnSecondInnings = "Game Over";
+//                flagForTeamWinningIndicationOnSecondInnings = "Game Over";
+                flagForTeamWinningIndicationOnSecondInnings = checkWinning.checkWinningStatusForSecondInnings();
             }
         }
 
@@ -184,7 +185,8 @@ public class GameService {
                 wicketTracker.startSecondInnings();
             }
             else if ((Innings == Constants.SECOND_INNINGS && (OverService.getOverCount() == totalOvers)) ||
-                    ((GameService.flagForTeamWinningIndicationOnSecondInnings).equals("Game Over")) ||
+                    ((GameService.flagForTeamWinningIndicationOnSecondInnings).equals("Current Team Wins")) ||
+                    ((GameService.flagForTeamWinningIndicationOnSecondInnings).equals("Current Team Loses")) ||
                     (WicketStatusProvider.getWicketLose() >= Constants.LAST_WICKET
                             && WicketStatusProvider.isAllWicketsDownInSecondInnings())){
                 scoreBoardDisplay.showScoreOfBothTeams();
