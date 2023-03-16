@@ -1,8 +1,8 @@
 package com.example.CricketApplication.controller;
 
 import com.example.CricketApplication.entities.Team;
+import com.example.CricketApplication.service.repositoriesservice.serviceinterfaces.TeamService;
 import com.example.CricketApplication.utils.builders.TeamBuilder;
-import com.example.CricketApplication.service.repositoriesservice.serviceimplementation.TeamServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,20 +16,25 @@ import java.util.List;
 public class TeamController {
 
     @Autowired
-    TeamServiceImpl teamRepositoryService;
+    private final TeamService teamService;
+
     @Autowired
     TeamBuilder teamBuilder;
 
+    public TeamController(TeamService teamService) {
+        this.teamService = teamService;
+    }
+
     @GetMapping("/getAllTeams")
     public ResponseEntity<List<Team>> getALlTeams() {
-        return new ResponseEntity<>(teamRepositoryService.getAllTeams(), HttpStatus.OK);
+        return new ResponseEntity<>(teamService.getAllTeams(), HttpStatus.OK);
     }
 
     @GetMapping("/getTeamById")
     public ResponseEntity<Team> getTeamById(
             @RequestParam(value = "id") Long id
     ) throws IOException {
-        return new ResponseEntity<>(teamRepositoryService.getTeamById(id), HttpStatus.OK);
+        return new ResponseEntity<>(teamService.getTeamById(id), HttpStatus.OK);
     }
 
     @PostMapping("/createTeam")
@@ -37,7 +42,7 @@ public class TeamController {
             @RequestParam(value = "teamName") String teamName
     ) {
         Team team = teamBuilder.build(teamName);
-        return new ResponseEntity<>(teamRepositoryService.saveTeam(team), HttpStatus.CREATED);
+        return new ResponseEntity<>(teamService.saveTeam(team), HttpStatus.CREATED);
     }
 
     @PutMapping("/updateTeam")
@@ -45,7 +50,7 @@ public class TeamController {
             @RequestParam(value = "id") Long id,
             @RequestBody Team team
     ) throws Exception {
-        return new ResponseEntity<>(teamRepositoryService.updateTeam(id, team), HttpStatus.OK);
+        return new ResponseEntity<>(teamService.updateTeam(id, team), HttpStatus.OK);
 
     }
 
@@ -53,7 +58,7 @@ public class TeamController {
     public ResponseEntity<HttpStatus> deleteTeam(
             @RequestParam(value = "id") Long id
     ) {
-        teamRepositoryService.deleteTeam(id);
+        teamService.deleteTeam(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

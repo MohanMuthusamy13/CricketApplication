@@ -2,6 +2,8 @@ package com.example.CricketApplication.controller;
 
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.service.repositoriesservice.serviceimplementation.PlayerServiceImpl;
+import com.example.CricketApplication.service.repositoriesservice.serviceinterfaces.PlayerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +16,11 @@ import java.util.List;
 @RequestMapping("/cricketGame/player")
 public class PlayerController {
 
-    private final PlayerServiceImpl playerRepositoryService;
+    private final PlayerService playerService;
 
-    public PlayerController(PlayerServiceImpl playerRepositoryService) {
-        this.playerRepositoryService = playerRepositoryService;
+    @Autowired
+    public PlayerController(PlayerService playerRepositoryService) {
+        this.playerService = playerRepositoryService;
     }
 
     @GetMapping("/getPlayerById")
@@ -25,7 +28,7 @@ public class PlayerController {
             @RequestParam(value = "id") Long id
     ) throws Exception {
         return new ResponseEntity<>(
-                playerRepositoryService.getPlayerById(id), HttpStatus.OK
+                playerService.getPlayerById(id), HttpStatus.OK
         );
     }
 
@@ -34,7 +37,7 @@ public class PlayerController {
             @RequestParam(value = "name") String name
     ) throws Exception {
         return new ResponseEntity<>(
-                playerRepositoryService.findByName(name), HttpStatus.OK
+                playerService.findByName(name), HttpStatus.OK
         );
     }
 
@@ -43,7 +46,7 @@ public class PlayerController {
             @RequestParam(value = "teamName") String teamName
     ) {
         return new ResponseEntity<>(
-                playerRepositoryService.getPlayersWithTeamName(teamName), HttpStatus.OK
+                playerService.getPlayersWithTeamName(teamName), HttpStatus.OK
         );
     }
 
@@ -52,7 +55,7 @@ public class PlayerController {
             @RequestParam(value = "baseAbility") String baseAbility
     ) {
         return new ResponseEntity<>(
-                playerRepositoryService.getPlayersWithBaseAbility(baseAbility), HttpStatus.OK
+                playerService.getPlayersWithBaseAbility(baseAbility), HttpStatus.OK
         );
     }
 }

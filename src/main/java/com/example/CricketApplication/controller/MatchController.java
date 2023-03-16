@@ -1,8 +1,8 @@
 package com.example.CricketApplication.controller;
 
 import com.example.CricketApplication.entities.Match;
+import com.example.CricketApplication.service.repositoriesservice.serviceinterfaces.MatchService;
 import com.example.CricketApplication.utils.builders.MatchBuilder;
-import com.example.CricketApplication.service.repositoriesservice.serviceimplementation.MatchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +15,22 @@ import java.util.List;
 @RequestMapping("/cricketGame/match")
 public class MatchController {
 
-    @Autowired
-    private MatchServiceImpl matchRepositoryService;
+    private final MatchService matchService;
 
     @Autowired
     private MatchBuilder matchBuilder;
+
+    @Autowired
+    public MatchController(MatchService matchService) {
+        this.matchService = matchService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Match> getMatchById(
             @PathVariable(value = "id") Long id
     ) throws Exception {
         return new ResponseEntity<>(
-                matchRepositoryService.getMatchById(id),
+                matchService.getMatchById(id),
                 HttpStatus.OK);
     }
 
@@ -35,7 +39,7 @@ public class MatchController {
             @RequestParam(value = "teamName") String teamName
     ) {
         return new ResponseEntity<>(
-                matchRepositoryService.getMatchesPlayedByTeamName(teamName),
+                matchService.getMatchesPlayedByTeamName(teamName),
                 HttpStatus.OK);
     }
 
@@ -44,7 +48,7 @@ public class MatchController {
             @RequestParam(value = "teamName") String teamName
     ) {
         return new ResponseEntity<>(
-                matchRepositoryService.getMatchesCountPlayedByTeamName(teamName),
+                matchService.getMatchesCountPlayedByTeamName(teamName),
                 HttpStatus.OK);
     }
 
@@ -56,7 +60,7 @@ public class MatchController {
     ) throws IOException {
 
         Match match = matchBuilder.build(format, teamId1, teamId2);
-        return new ResponseEntity<>(matchRepositoryService.saveMatch(match), HttpStatus.CREATED);
+        return new ResponseEntity<>(matchService.saveMatch(match), HttpStatus.CREATED);
     }
 
 }

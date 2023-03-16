@@ -32,8 +32,4 @@ public class MatchStatusRecord {
     private Map<Long, Integer> scoreOfBothTeams;
 
     private String matchStatus;
-
-    private PlayerStatsStructure maxScorer;
-
-    private PlayerStatsStructure maxWicketTaker;
 }

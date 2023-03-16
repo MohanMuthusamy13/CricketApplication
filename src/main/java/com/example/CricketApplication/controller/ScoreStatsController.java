@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("cricketGame/scoreStats")
 public class ScoreStatsController {
 
-    private ScoreRecorderService scoreRecorderService;
+    private final ScoreRecorderService scoreRecorderService;
 
     @Autowired
     public ScoreStatsController(ScoreRecorderService scoreRecorderService) {

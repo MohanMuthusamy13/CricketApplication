@@ -56,16 +56,4 @@ public class MatchServiceImpl implements MatchService {
         match.setMatchStatus(updatedMatch.getMatchStatus());
         return matchRepository.save(match);
     }
-
-//    public PlayerStatsStructure getMaxScorerIdByMatch(long matchId) {
-//        return matchRepository.getMaxScorerIdByMatch(matchId);
-//    }
-//
-//    public PlayerStatsStructure getWicketTakerIdByMatch(long matchId) {
-//        return matchRepository.getMaxWicketTakerIdByMatch(matchId);
-//    }
-//
-//    public PlayerStatsStructure getMaxStrikeRatePlayer(long matchId) {
-//        return matchRepository.getMaxStrikeRatePlayer(matchId);
-//    }
 }

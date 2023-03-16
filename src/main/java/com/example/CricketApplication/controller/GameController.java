@@ -1,5 +1,6 @@
 package com.example.CricketApplication.controller;
 
+import com.example.CricketApplication.service.services.majorgameservice.GameService;
 import com.example.CricketApplication.service.services.matchformatservice.MatchFormatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +13,12 @@ import com.example.CricketApplication.service.services.majorgameservice.GameServ
 
 public class GameController {
 
+    private final GameService gameService;
+
     @Autowired
-    GameServiceImpl cricket;
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
+    }
 
     @GetMapping("/startMatch")
     public ResponseEntity<String> startMatch(
@@ -21,7 +26,7 @@ public class GameController {
             @RequestParam(value = "matchFormat") String matchFormat
     ) throws Exception {
         String format = MatchFormatService.matchFormatScheduler(matchFormat);
-        String status = cricket.startGame(matchId);
+        String status = gameService.startGame(matchId);
         return new ResponseEntity<>("Match is completed", HttpStatus.OK);
     }
 

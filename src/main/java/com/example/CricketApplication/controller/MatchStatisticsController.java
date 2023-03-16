@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/cricketGame/stats")
 public class MatchStatisticsController {
 
-    private PlayerService playerService;
+    private final PlayerService playerService;
 
     @Autowired
     private MatchService matchService;
