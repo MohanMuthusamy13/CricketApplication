@@ -1,7 +1,8 @@
 package com.example.CricketApplication.cricketgamesimulator.controller;
 
-import com.example.CricketApplication.cricketgamesimulator.entities.Player;
-import com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation.PlayerServiceImpl;
+import com.example.CricketApplication.controller.PlayerController;
+import com.example.CricketApplication.entities.Player;
+import com.example.CricketApplication.service.repositoriesservice.serviceimplementation.PlayerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

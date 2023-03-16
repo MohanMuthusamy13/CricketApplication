@@ -1,9 +1,10 @@
 package com.example.CricketApplication.cricketgamesimulator.service.repositoriesservice.serviceimplementation;
 
-import com.example.CricketApplication.cricketgamesimulator.entities.Match;
-import com.example.CricketApplication.cricketgamesimulator.entities.Player;
-import com.example.CricketApplication.cricketgamesimulator.entities.Team;
-import com.example.CricketApplication.cricketgamesimulator.repositories.MatchRepository;
+import com.example.CricketApplication.entities.Match;
+import com.example.CricketApplication.entities.Player;
+import com.example.CricketApplication.entities.Team;
+import com.example.CricketApplication.repositories.MatchRepository;
+import com.example.CricketApplication.service.repositoriesservice.serviceimplementation.MatchServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

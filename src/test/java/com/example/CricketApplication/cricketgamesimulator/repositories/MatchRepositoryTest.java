@@ -1,8 +1,9 @@
 package com.example.CricketApplication.cricketgamesimulator.repositories;
 
-import com.example.CricketApplication.cricketgamesimulator.entities.Match;
-import com.example.CricketApplication.cricketgamesimulator.entities.Player;
-import com.example.CricketApplication.cricketgamesimulator.entities.Team;
+import com.example.CricketApplication.entities.Match;
+import com.example.CricketApplication.entities.Player;
+import com.example.CricketApplication.entities.Team;
+import com.example.CricketApplication.repositories.MatchRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;

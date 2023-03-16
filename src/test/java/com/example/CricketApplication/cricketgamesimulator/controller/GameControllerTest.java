@@ -1,7 +1,7 @@
 package com.example.CricketApplication.cricketgamesimulator.controller;
 
-import com.example.CricketApplication.cricketgamesimulator.service.services.majorgameservice.GameServiceImpl;
-import com.example.CricketApplication.cricketgamesimulator.service.services.matchformatservice.MatchFormatService;
+import com.example.CricketApplication.controller.GameController;
+import com.example.CricketApplication.service.services.majorgameservice.GameServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
