@@ -12,11 +12,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "ScoreRecorder")
+@Document(collection = "score_recorder")
 public class ScoreRecord {
 
     @Transient
-    public static final String SEQUENCE_NAME = "scoreRecorderSeq";
+    public static final String SEQUENCE_NAME = "score_recorder_seq";
 
     @Id
     private long ballId;

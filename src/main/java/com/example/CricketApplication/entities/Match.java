@@ -11,11 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "Matches")
+@Document(collection = "matches")
 public class Match {
 
     @Transient
-    public static final String SEQUENCE_NAME = "sequenceForMatches";
+    public static final String SEQUENCE_NAME = "sequence_for_matches";
 
     @Id
     private Long matchId;

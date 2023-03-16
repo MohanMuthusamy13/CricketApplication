@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "sequenceGeneratorForTeams")
+@Document(collection = "sequence_generator_for_teams")
 public class DBSequence {
     @Id
     private String id;

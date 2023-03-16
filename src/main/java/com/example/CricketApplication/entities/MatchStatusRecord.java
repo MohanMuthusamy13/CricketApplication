@@ -16,13 +16,13 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "MatchStatus")
+@Document(collection = "match_status")
 @CompoundIndexes(
         @CompoundIndex(name = "compound_index_id_status",
                        def = "{matchId : 1, matchStatus : 1}")
 )
 public class MatchStatusRecord {
-    public static final String SEQUENCE_NAME = "matchStatusRecorderSeq";
+    public static final String SEQUENCE_NAME = "match_status_recorder_seq";
 
     @Id
     private long matchStatusRecordId;

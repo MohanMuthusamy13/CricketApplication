@@ -11,11 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document("Teams")
+@Document("teams")
 public class Team {
 
     @Transient
-    public static final String SEQUENCE_NAME = "sequenceForTeams";
+    public static final String SEQUENCE_NAME = "sequence_for_teams";
 
     @Id
     private Long teamId;

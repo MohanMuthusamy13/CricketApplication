@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(collection = "DBSequenceForPlayers")
+@Document(collection = "db_sequence_for_players")
 public class DBSeqForPlayers {
 
     @Id

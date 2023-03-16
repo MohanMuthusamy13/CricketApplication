@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "dbSequenceForMatches")
+@Document(collection = "db_sequence_for_matches")
 public class DBSeqForMatches {
 
     @Id
