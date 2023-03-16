@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cricketGame")
+@RequestMapping("/cricket-game")
 public class TeamController {
 
     @Autowired

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cricketGame/player")
+@RequestMapping("/cricket-game/player")
 public class PlayerController {
 
     private final PlayerServiceImpl playerRepositoryService;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("cricketGame/scoreStats")
+@RequestMapping("cricket-game/scoreStats")
 public class ScoreStatsController {
 
     private ScoreRecorderService scoreRecorderService;

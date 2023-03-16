@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.CricketApplication.cricketgamesimulator.service.services.majorgameservice.GameServiceImpl;
 
 @RestController
-@RequestMapping("/cricketGame")
+@RequestMapping("/cricket-game")
 
 public class GameController {
 

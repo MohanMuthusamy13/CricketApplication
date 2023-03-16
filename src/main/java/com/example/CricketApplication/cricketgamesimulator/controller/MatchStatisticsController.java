@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/cricketGame/stats")
+@RequestMapping("/cricket-game/stats")
 public class MatchStatisticsController {
 
     @Autowired
