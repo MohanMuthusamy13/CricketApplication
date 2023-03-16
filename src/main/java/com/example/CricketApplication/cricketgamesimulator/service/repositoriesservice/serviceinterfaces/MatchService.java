@@ -12,4 +12,5 @@ public interface MatchService {
     Match getMatchById(String matchId);
     Match updateMatch(String matchId, Match match);
     List<Match> getMatchesByMatchFormat(String matchFormat);
+    List<Match> getMatchesByTeamName(String teamName);
 }

@@ -20,4 +20,9 @@ public class MatchStatusImpl implements MatchStatusService {
     public MatchStatusRecord save(MatchStatusRecord matchStatusRecord) {
         return matchStatusRepository.save(matchStatusRecord);
     }
+
+    @Override
+    public MatchStatusRecord getMatchStatus(String matchId) {
+        return matchStatusRepository.getMatchStatus(matchId);
+    }
 }

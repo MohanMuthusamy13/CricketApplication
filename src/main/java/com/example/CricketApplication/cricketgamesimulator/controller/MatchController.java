@@ -50,4 +50,13 @@ public class MatchController {
         );
     }
 
+    @GetMapping("/getMatchesByTeamName")
+    public ResponseEntity<List<Match>> getMatchesByTeamName(
+            @RequestParam(value = "teamName") String teamName) {
+        return new ResponseEntity<>(
+                matchRepositoryService.getMatchesByTeamName(teamName),
+                HttpStatus.OK
+        );
+    }
+
 }

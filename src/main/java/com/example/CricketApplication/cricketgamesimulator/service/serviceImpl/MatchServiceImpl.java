@@ -52,4 +52,9 @@ public class MatchServiceImpl implements MatchService {
     public List<Match> getMatchesByMatchFormat(String matchFormat) {
         return matchRepository.findByMatchFormat(matchFormat);
     }
+
+    @Override
+    public List<Match> getMatchesByTeamName(String teamName) {
+        return matchRepository.getMatchesByTeamName(teamName);
+    }
 }

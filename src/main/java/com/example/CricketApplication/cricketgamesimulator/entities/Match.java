@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(indexName = "matches")
+@Document(indexName = "match")
 public class Match {
 
     @Id
