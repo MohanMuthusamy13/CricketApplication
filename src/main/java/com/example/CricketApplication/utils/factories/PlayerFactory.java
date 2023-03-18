@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlayerFactory {
 
+    @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
     @Autowired
     private PlayerServiceImpl playerRepositoryService;
@@ -20,7 +21,7 @@ public class PlayerFactory {
         this.sequenceGeneratorService = sequenceGeneratorService;
     }
 
-    public Player createBatsmanWithInitialConditions(String playerName, String teamName, Team team) {
+    public Player createBatsmanWithInitialConditions(String playerName, String teamName) {
         Player player = new Player(
                 sequenceGeneratorService.getSequenceNumber(Player.SEQUENCE_NAME),
                 playerName,
@@ -39,7 +40,7 @@ public class PlayerFactory {
         return player;
     }
 
-    public Player createBowlerWithInitialConditions(String playerName, String teamName, Team team) {
+    public Player createBowlerWithInitialConditions(String playerName, String teamName) {
         Player player = new Player(
                 sequenceGeneratorService.getSequenceNumber(Player.SEQUENCE_NAME),
                 playerName,
@@ -58,12 +59,12 @@ public class PlayerFactory {
         return player;
     }
 
-    public Player createPlayer(String name, String baseAbility,String teamName, Team team) {
+    public Player createPlayer(String name, String baseAbility,String teamName) {
         if (baseAbility.equals("Batsman")) {
-            return createBatsmanWithInitialConditions(name, teamName,  team);
+            return createBatsmanWithInitialConditions(name, teamName);
         }
         else {
-            return createBowlerWithInitialConditions(name, teamName, team);
+            return createBowlerWithInitialConditions(name, teamName);
         }
     }
 }

@@ -66,7 +66,6 @@ public class GamePlay {
                 scoreAccumulator(GameStarter.getBatting(), runsScorePerBall);
                 break;
         }
-        System.out.println(OverService.getOverInString());
         playService.checkLegalBallAndUpdateStats();
     }
 }

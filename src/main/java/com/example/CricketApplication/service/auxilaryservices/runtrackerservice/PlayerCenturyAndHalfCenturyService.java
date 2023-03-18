@@ -7,14 +7,8 @@ import java.util.List;
 
 public class PlayerCenturyAndHalfCenturyService {
 
-    public static void saveStatsOfCenturies(Player player) {
-        PlayersService.checkForCenturiesAndHalfCenturies(player);
-    }
-
     public static void playerStat(List<Player> players) {
-        for (Player player : players) {
-            saveStatsOfCenturies(player);
-        }
+        players.forEach(PlayersService::checkForCenturiesAndHalfCenturies);
     }
 
     public static void centuryStatsProvider(List playerTeams) {

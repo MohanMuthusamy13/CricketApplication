@@ -58,7 +58,6 @@ public class MatchServiceImpl implements MatchService {
         match.setTeamsPlayed(updatedMatch.getTeamsPlayed());
         match.setMatchStatus(updatedMatch.getMatchStatus());
         match.setMatchFinished(updatedMatch.isMatchFinished());
-
         return matchRepository.save(match);
     }
 }

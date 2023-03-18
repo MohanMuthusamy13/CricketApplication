@@ -5,7 +5,6 @@ import com.example.CricketApplication.entities.Team;
 import java.util.List;
 
 public interface TeamService {
-
     List<Team> getAllTeams();
     Team saveTeam(Team team);
     Team getTeamById(long id);

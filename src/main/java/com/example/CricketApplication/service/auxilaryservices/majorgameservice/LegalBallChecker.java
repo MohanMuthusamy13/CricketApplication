@@ -29,9 +29,6 @@ public class LegalBallChecker {
     MatchStatusSaverBuilder matchStatusSaverBuilder;
 
     public void checkLegalBallAndUpdateStats() {
-
-        System.out.println(OverService.getOverCount());
-        System.out.println(OverService.getBallsCount());
         if (GamePlay.isLegalBallFlag()) {
             OverService.BowlingStarts();
         }

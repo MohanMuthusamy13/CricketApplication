@@ -21,7 +21,6 @@ public class RunsGenerator {
         }
     }
 
-
     public int runsGeneratorByAbility(String playerBaseAbility) {
         TreeMap<Integer, Integer> dictionary = dictionaryAssigner(playerBaseAbility);
         int randomNumber = (int)(Math.random() * 100) ;

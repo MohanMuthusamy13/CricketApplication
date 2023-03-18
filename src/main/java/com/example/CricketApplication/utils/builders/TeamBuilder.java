@@ -31,10 +31,9 @@ public class TeamBuilder {
     }
 
     public Team build(String teamName) {
-        Team team = Team.builder()
+        return Team.builder()
                 .teamId(sequenceGeneratorService.getSequenceNumber(Team.SEQUENCE_NAME))
                 .teamName(teamName).players(playersTeamService.getPlayers(teamName))
                 .matchesPlayed(1).build();
-        return team;
     }
 }
