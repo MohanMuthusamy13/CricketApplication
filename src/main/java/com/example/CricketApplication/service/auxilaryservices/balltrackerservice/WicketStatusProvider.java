@@ -43,7 +43,7 @@ public class WicketStatusProvider extends WinningStatusProvider {
         GameStarter.getBowlingPlayer().setActiveStatus("inactive");
         GameStarter.setInnings(Constants.SECOND_INNINGS);
         wicketLose = Constants.INITIAL_WICKET_LOSE;
-        GameStarter.setBatting(Math.abs(1 - GameStarter.getBatting()));
+        GameStarter.setBattingTeamIndicator(Math.abs(1 - GameStarter.getBattingTeamIndicator()));
         score.setCurrentScore(Constants.INITIAL_SCORE);
         OverService.startFromFirstOver();
         GameStarter.setCurrentBatter(Constants.FIRST_BATTER_IN_TEAM);

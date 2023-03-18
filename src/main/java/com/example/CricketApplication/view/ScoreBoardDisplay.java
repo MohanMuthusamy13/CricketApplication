@@ -22,7 +22,7 @@ public class ScoreBoardDisplay {
                    TOTAL RUNS SCORED BY TEAM %d : %d
   
                    """,
-                GameStarter.getBatting() + 1, GameStarter.getScoreTeams()[GameStarter.getBatting()]);
+                GameStarter.getBattingTeamIndicator() + 1, GameStarter.getScoreTeams()[GameStarter.getBattingTeamIndicator()]);
     }
 
     public String runsForDisplayProvider(int runsScorePerBall) {
@@ -55,7 +55,7 @@ public class ScoreBoardDisplay {
 
                         %n""",
                 runsForDisplayProvider(GamePlay.getRunsScorePerBall()),
-                OverService.getOverInString(), ScoreService.getScoreOfBothTeams()[GameStarter.getBatting()],
+                OverService.getOverInString(), ScoreService.getScoreOfBothTeams()[GameStarter.getBattingTeamIndicator()],
                 WicketStatusProvider.getWicketLose(),
                 GameStarter.getBattingPlayer().getName(), GameStarter.getBattingPlayer().getScore(),
                 GameStarter.getBowlingPlayer().getName(), GameStarter.getBowlingPlayer().getWicketsTaken()
@@ -110,9 +110,9 @@ public class ScoreBoardDisplay {
 
     public void showStatusPerBallForTesting() {
         System.out.println("SCORE BOARD OF BATTING");
-        System.out.println(GameStarter.getPlayingTeamsPlayers().get(GameStarter.getBatting()));
+        System.out.println(GameStarter.getPlayingTeamsPlayers().get(GameStarter.getBattingTeamIndicator()));
 
         System.out.println("SCORE BOARD OF BOWLING");
-        System.out.println(GameStarter.getPlayingTeamsPlayers().get(Math.abs(1 - GameStarter.getBatting())));
+        System.out.println(GameStarter.getPlayingTeamsPlayers().get(Math.abs(1 - GameStarter.getBattingTeamIndicator())));
     }
 }

@@ -37,9 +37,9 @@ public class GameStarter {
     @Getter @Setter
     private static int innings;
     @Getter @Setter
-    private static int batting;
+    private static int battingTeamIndicator;
     @Setter
-    private static int bowling;
+    private static int bowlingTeamIndicator;
     @Getter @Setter
     private static int totalOvers;
     private static String matchFormat;
@@ -82,11 +82,11 @@ public class GameStarter {
     }
 
     public static Player getBattingPlayer() {
-        return ((ArrayList<Player>) playingTeamsPlayers.get(batting)).get(currentBatter);
+        return ((ArrayList<Player>) playingTeamsPlayers.get(battingTeamIndicator)).get(currentBatter);
     }
 
     public static Player getBowlingPlayer() {
-        return ((ArrayList<Player>) playingTeamsPlayers.get(Math.abs(1 - batting))).get(currentBowler);
+        return ((ArrayList<Player>) playingTeamsPlayers.get(Math.abs(1 - battingTeamIndicator))).get(currentBowler);
     }
 
     public static void setCurrentBatter(int currentBatter) {

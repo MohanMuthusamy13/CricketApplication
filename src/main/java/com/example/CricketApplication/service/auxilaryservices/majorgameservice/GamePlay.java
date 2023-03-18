@@ -1,7 +1,6 @@
 package com.example.CricketApplication.service.auxilaryservices.majorgameservice;
 
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.IllegalBallTrackerService;
-import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WicketStatusProvider;
 import com.example.CricketApplication.service.auxilaryservices.playerservice.AuxiliaryPlayerService;
 import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.RunsGenerator;
@@ -55,15 +54,15 @@ public class GamePlay {
                 break;
             case Constants.DOT_BALL, Constants.ONE_RUN,
                     Constants.TWO_RUNS, Constants.THREE_RUNS, Constants.FIVE_RUNS:
-                scoreAccumulator(GameStarter.getBatting(), runsScorePerBall);
+                scoreAccumulator(GameStarter.getBattingTeamIndicator(), runsScorePerBall);
                 break;
             case Constants.BOUNDARY:
                 GameStarter.getBattingPlayer().setNoOfFours(1);
-                scoreAccumulator(GameStarter.getBatting(), runsScorePerBall);
+                scoreAccumulator(GameStarter.getBattingTeamIndicator(), runsScorePerBall);
                 break;
             case Constants.SIX:
                 GameStarter.getBattingPlayer().setNoOfSixes(1);
-                scoreAccumulator(GameStarter.getBatting(), runsScorePerBall);
+                scoreAccumulator(GameStarter.getBattingTeamIndicator(), runsScorePerBall);
                 break;
         }
         playService.checkLegalBallAndUpdateStats();

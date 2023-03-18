@@ -94,7 +94,7 @@ public class AuxiliaryPlayerService {
                 OverService.getOverCount() + "." + OverService.getBallsCount(),
                 scoreBoardDisplay.runsForDisplayProvider(runsScorePerBall),
                 GameStarter.getInnings(),
-                ScoreService.getScoreOfBothTeams()[GameStarter.getBatting()],
+                ScoreService.getScoreOfBothTeams()[GameStarter.getBattingTeamIndicator()],
                 WicketStatusProvider.getWicketLose(),
                 GameStarter.getBattingPlayer(),
                 GameStarter.getBowlingPlayer()

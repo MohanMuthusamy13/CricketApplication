@@ -15,8 +15,8 @@ public class ResetGameService {
     }
 
     public static void setToInitialState() {
-        GameStarter.setBatting(Constants.INITIAL_STATE);
-        GameStarter.setBowling(Constants.INITIAL_STATE);
+        GameStarter.setBattingTeamIndicator(Constants.INITIAL_STATE);
+        GameStarter.setBowlingTeamIndicator(Constants.INITIAL_STATE);
         GameStarter.setInnings(Constants.FIRST_INNINGS);
         GameStarter.setCurrentBatter(Constants.FIRST_BATTER_IN_TEAM);
         GameStarter.setCurrentBowler(Constants.FIRST_BOWLER_IN_TEAM);

@@ -21,12 +21,12 @@ public class TossService {
         int teamSelected = tossWinner.getBattingOrderIndicator();
         TossDisplay.tossDisplayed(teamSelected);
         if (teamSelected == 0) {
-            GameStarter.setBatting(Constants.SECOND_TEAM);
-            GameStarter.setBowling(Constants.FIRST_TEAM);
+            GameStarter.setBattingTeamIndicator(Constants.SECOND_TEAM);
+            GameStarter.setBowlingTeamIndicator(Constants.FIRST_TEAM);
         }
         else {
-            GameStarter.setBatting(Constants.FIRST_TEAM);
-            GameStarter.setBowling(Constants.SECOND_TEAM);
+            GameStarter.setBattingTeamIndicator(Constants.FIRST_TEAM);
+            GameStarter.setBowlingTeamIndicator(Constants.SECOND_TEAM);
         }
     }
 }

@@ -19,13 +19,13 @@ public class IllegalBallTrackerService {
     private IllegalBallTrackerService() {}
 
     public static void wideTracker() {
-        ScoreService.addScore(GameStarter.getBatting(), Constants.ILLEGAL_BALL_RUN);
+        ScoreService.addScore(GameStarter.getBattingTeamIndicator(), Constants.ILLEGAL_BALL_RUN);
         GameStarter.getBowlingPlayer().setBallsBowled(ignoreBallCount);
         wideBalls++;
     }
 
     public static void noBallTracker() {
-        ScoreService.addScore(GameStarter.getBatting(), Constants.ILLEGAL_BALL_RUN);
+        ScoreService.addScore(GameStarter.getBattingTeamIndicator(), Constants.ILLEGAL_BALL_RUN);
         GameStarter.getBowlingPlayer().setBallsBowled(ignoreBallCount);
         noBalls++;
     }

@@ -38,8 +38,8 @@ public class ResumeMatchService {
         OverService.setOverCount(matchStateSaver.getOverCount());
         OverService.setBallsCount(matchStateSaver.getBallCount());
         WicketStatusProvider.setWicketLose(matchStateSaver.getWicketsLose());
-        GameStarter.setBatting(matchStateSaver.getBatting());
-        GameStarter.setBowling(matchStateSaver.getBowling());
+        GameStarter.setBattingTeamIndicator(matchStateSaver.getBatting());
+        GameStarter.setBowlingTeamIndicator(matchStateSaver.getBowling());
         auxiliaryPlayerService.playingTeamPlayersProvider(resumedMatch.getMatchId());
         GameStarter.setCurrentBatter(matchStateSaver.getCurrentBatter());
         GameStarter.setCurrentBowler(matchStateSaver.getCurrentBowler());

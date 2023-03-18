@@ -21,8 +21,8 @@ public class WinningStatusProvider {
 
     public String checkWinningStatusForSecondInnings() {
         if ((GameStarter.getInnings() == Constants.SECOND_INNINGS)
-                && ((GameStarter.getScoreTeams()[GameStarter.getBatting()] >
-                GameStarter.getScoreTeams()[Math.abs(1 - GameStarter.getBatting())]))){
+                && ((GameStarter.getScoreTeams()[GameStarter.getBattingTeamIndicator()] >
+                GameStarter.getScoreTeams()[Math.abs(1 - GameStarter.getBattingTeamIndicator())]))){
             return "Current Team Wins";
         }
         else if (WicketStatusProvider.isAllWicketsDownInSecondInnings()) {
@@ -36,8 +36,8 @@ public class WinningStatusProvider {
     }
 
     public static int winningRunsDifference() {
-        return GameStarter.getScoreTeams()[Math.abs(1 - GameStarter.getBatting())] -
-                GameStarter.getScoreTeams()[GameStarter.getBatting()];
+        return GameStarter.getScoreTeams()[Math.abs(1 - GameStarter.getBattingTeamIndicator())] -
+                GameStarter.getScoreTeams()[GameStarter.getBattingTeamIndicator()];
     }
 
     public static String diffProvider(int winningTeam) {
