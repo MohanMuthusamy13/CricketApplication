@@ -34,6 +34,7 @@ public class MatchBuilder {
                                 teamRepositoryService.getTeamById(teamId2)
                         ))
                 .matchFormat(format)
+                .isMatchFinished(false)
                 .build();
     }
 }

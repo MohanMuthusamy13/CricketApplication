@@ -1,7 +1,6 @@
 package com.example.CricketApplication.controller;
 
 import com.example.CricketApplication.entities.Player;
-import com.example.CricketApplication.service.serviceinterfaces.MatchService;
 import com.example.CricketApplication.service.serviceinterfaces.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MatchStatisticsController {
 
     private final PlayerService playerService;
-
-    @Autowired
-    private MatchService matchService;
 
     @Autowired
     public MatchStatisticsController(PlayerService playerService) {

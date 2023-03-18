@@ -1,7 +1,7 @@
 package com.example.CricketApplication.service.auxilaryservices.balltrackerservice;
 
 import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.ScoreService;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameStarter;
 import com.example.CricketApplication.utils.Constants;
 
 public class WinningStatusProvider {
@@ -20,9 +20,9 @@ public class WinningStatusProvider {
     }
 
     public String checkWinningStatusForSecondInnings() {
-        if ((GameService.getInnings() == Constants.SECOND_INNINGS)
-                && ((GameService.getScoreTeams()[GameService.getBatting()] >
-                GameService.getScoreTeams()[Math.abs(1 - GameService.getBatting())]))){
+        if ((GameStarter.getInnings() == Constants.SECOND_INNINGS)
+                && ((GameStarter.getScoreTeams()[GameStarter.getBatting()] >
+                GameStarter.getScoreTeams()[Math.abs(1 - GameStarter.getBatting())]))){
             return "Current Team Wins";
         }
         else if (WicketStatusProvider.isAllWicketsDownInSecondInnings()) {
@@ -36,20 +36,20 @@ public class WinningStatusProvider {
     }
 
     public static int winningRunsDifference() {
-        return GameService.getScoreTeams()[Math.abs(1 - GameService.getBatting())] -
-                GameService.getScoreTeams()[GameService.getBatting()];
+        return GameStarter.getScoreTeams()[Math.abs(1 - GameStarter.getBatting())] -
+                GameStarter.getScoreTeams()[GameStarter.getBatting()];
     }
 
     public static String diffProvider(int winningTeam) {
         String diffReveler = "";
-        if (GameService
+        if (GameStarter
                 .getFlagForTeamWinningIndicationOnSecondInnings().equals("Current Team Wins")) {
             diffReveler = String.format(
                     "Team %d won by %d wickets"
                     , winningTeam, winningWicketsDifference()
             );
         }
-        else if (GameService
+        else if (GameStarter
                 .getFlagForTeamWinningIndicationOnSecondInnings().equals("Current Team Loses")){
             diffReveler = String.format(
                     "Team %d won by %d runs"
@@ -62,7 +62,7 @@ public class WinningStatusProvider {
 
 
     public byte checkWinningStatusNumber() {
-        if ((OverService.getOverCount() == GameService.getTotalOvers()) || (GameService.getFlagForTeamWinningIndicationOnSecondInnings().equals("Game Over"))) {
+        if ((OverService.getOverCount() == GameStarter.getTotalOvers()) || (GameStarter.getFlagForTeamWinningIndicationOnSecondInnings().equals("Game Over"))) {
             if (checkWinningTeamCondition() == Constants.FIRST_TEAM_WINNING_INDICATION) {
                 return Constants.FIRST_TEAM_WINNING_INDICATION;
             }

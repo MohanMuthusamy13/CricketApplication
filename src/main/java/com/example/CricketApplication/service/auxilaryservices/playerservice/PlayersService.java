@@ -16,7 +16,6 @@ public class PlayersService {
 
     @Autowired
     private PlayerBuilder playerBuilder;
-
     private final Faker faker = new Faker();
 
     public PlayersService(PlayerBuilder playerBuilder) {

@@ -1,9 +1,10 @@
 package com.example.CricketApplication.view;
 
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GamePlay;
 import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.ScoreService;
 import com.example.CricketApplication.entities.Team;
 import org.springframework.stereotype.Component;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameStarter;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WicketStatusProvider;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WinningStatusProvider;
@@ -21,7 +22,7 @@ public class ScoreBoardDisplay {
                    TOTAL RUNS SCORED BY TEAM %d : %d
   
                    """,
-                GameService.getBatting() + 1, GameService.getScoreTeams()[GameService.getBatting()]);
+                GameStarter.getBatting() + 1, GameStarter.getScoreTeams()[GameStarter.getBatting()]);
     }
 
     public String runsForDisplayProvider(int runsScorePerBall) {
@@ -53,11 +54,11 @@ public class ScoreBoardDisplay {
                         Current Active Bowler : %s\t\t\t\t\tCurrent Active Bowler Wickets : %d
 
                         %n""",
-                runsForDisplayProvider(GameService.getRunsScorePerBall()),
-                OverService.getOverInString(), ScoreService.getScoreOfBothTeams()[GameService.getBatting()],
+                runsForDisplayProvider(GamePlay.getRunsScorePerBall()),
+                OverService.getOverInString(), ScoreService.getScoreOfBothTeams()[GameStarter.getBatting()],
                 WicketStatusProvider.getWicketLose(),
-                GameService.getBattingPlayer().getName(), GameService.getBattingPlayer().getScore(),
-                GameService.getBowlingPlayer().getName(), GameService.getBowlingPlayer().getWicketsTaken()
+                GameStarter.getBattingPlayer().getName(), GameStarter.getBattingPlayer().getScore(),
+                GameStarter.getBowlingPlayer().getName(), GameStarter.getBowlingPlayer().getWicketsTaken()
         );
     }
 
@@ -67,7 +68,7 @@ public class ScoreBoardDisplay {
                 Score board of Team 1
                 %s
                 Score board of Team 2
-                %s""", GameService.getPlayingTeamsPlayers().get(0), GameService.getPlayingTeamsPlayers().get(1));
+                %s""", GameStarter.getPlayingTeamsPlayers().get(0), GameStarter.getPlayingTeamsPlayers().get(1));
     }
 
     public void showFinalScoreBoard() {
@@ -79,7 +80,7 @@ public class ScoreBoardDisplay {
     }
 
     public String showScoreOfBothTeams() {
-        List<Team> playingTeams = GameService.getTeams();
+        List<Team> playingTeams = GameStarter.getTeams();
         String result = String.format(
                 """
                         FINAL SCORE
@@ -95,7 +96,7 @@ public class ScoreBoardDisplay {
     }
 
     public String getResults() {
-        List<Team> playingTeams = GameService.getTeams();
+        List<Team> playingTeams = GameStarter.getTeams();
         if (ScoreService.getScoreOfBothTeams()[0] > ScoreService.getScoreOfBothTeams()[1]) {
             String result = WinningStatusProvider.diffProvider(1);
             return String.format("%s won the match", playingTeams.get(0).getTeamName());
@@ -109,9 +110,9 @@ public class ScoreBoardDisplay {
 
     public void showStatusPerBallForTesting() {
         System.out.println("SCORE BOARD OF BATTING");
-        System.out.println(GameService.getPlayingTeamsPlayers().get(GameService.getBatting()));
+        System.out.println(GameStarter.getPlayingTeamsPlayers().get(GameStarter.getBatting()));
 
         System.out.println("SCORE BOARD OF BOWLING");
-        System.out.println(GameService.getPlayingTeamsPlayers().get(Math.abs(1 - GameService.getBatting())));
+        System.out.println(GameStarter.getPlayingTeamsPlayers().get(Math.abs(1 - GameStarter.getBatting())));
     }
 }

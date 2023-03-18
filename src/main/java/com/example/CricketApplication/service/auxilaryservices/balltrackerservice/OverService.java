@@ -1,7 +1,7 @@
 package com.example.CricketApplication.service.auxilaryservices.balltrackerservice;
 
 import com.example.CricketApplication.entities.Player;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameStarter;
 import com.example.CricketApplication.utils.Constants;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +38,7 @@ public class OverService {
 
     public static void BowlingStarts() {
 
-        Player currentBowler = GameService.getBowlingPlayer();
+        Player currentBowler = GameStarter.getBowlingPlayer();
 
         if (tempBallCount < Constants.OVER_FINISHED) {
             tempBallCount++;
@@ -46,8 +46,8 @@ public class OverService {
         }
         else {
             currentBowler.setActiveStatus("inactive");
-            GameService.setNextBowler();
-            currentBowler = GameService.getBowlingPlayer();
+            GameStarter.setNextBowler();
+            currentBowler = GameStarter.getBowlingPlayer();
             currentBowler.setActiveStatus("active");
             currentBowler.setBallsBowled(Constants.INCREASE_BALL_COUNT);
             tempBallCount = 1;

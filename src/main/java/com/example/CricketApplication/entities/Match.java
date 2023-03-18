@@ -25,4 +25,6 @@ public class Match {
     private List<Team> teamsPlayed;
 
     private String matchStatus;
+
+    private boolean isMatchFinished;
 }

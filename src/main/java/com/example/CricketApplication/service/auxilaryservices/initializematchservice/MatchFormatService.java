@@ -1,7 +1,7 @@
 package com.example.CricketApplication.service.auxilaryservices.initializematchservice;
 
 import com.example.CricketApplication.enums.MatchFormat;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameStarter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,10 +29,9 @@ public class MatchFormatService {
         }
     }
 
-    public static String matchFormatScheduler(String matchFormat) {
+    public static void matchFormatScheduler(String matchFormat) {
         plannedMatchFormat = matchFormat.toUpperCase();
-        GameService.setTotalOvers(MatchFormatService.oversScheduler(plannedMatchFormat));
-        return plannedMatchFormat;
+        GameStarter.setTotalOvers(MatchFormatService.oversScheduler(plannedMatchFormat));
     }
 
 }

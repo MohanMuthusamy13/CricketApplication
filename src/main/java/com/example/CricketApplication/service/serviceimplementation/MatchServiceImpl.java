@@ -12,11 +12,15 @@ import java.util.List;
 @Service
 public class MatchServiceImpl implements MatchService {
 
-    private MatchRepositoryImpl matchRepository;
+    private final MatchRepositoryImpl matchRepository;
 
     @Autowired
     public MatchServiceImpl(MatchRepositoryImpl matchRepository) {
         this.matchRepository = matchRepository;
+    }
+
+    public List<Match> getMatches() {
+        return matchRepository.findAll();
     }
 
     @Override
@@ -53,6 +57,8 @@ public class MatchServiceImpl implements MatchService {
         match.setMatchFormat(updatedMatch.getMatchFormat());
         match.setTeamsPlayed(updatedMatch.getTeamsPlayed());
         match.setMatchStatus(updatedMatch.getMatchStatus());
+        match.setMatchFinished(updatedMatch.isMatchFinished());
+
         return matchRepository.save(match);
     }
 }

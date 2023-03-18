@@ -1,10 +1,13 @@
 package com.example.CricketApplication.service.auxilaryservices.playerservice;
 
+import com.example.CricketApplication.entities.ScoreRecord;
 import com.example.CricketApplication.entities.Team;
+import com.example.CricketApplication.repositories.repositoryImpl.MatchRepositoryImpl;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.ResumeMatchService;
 import com.example.CricketApplication.service.serviceimplementation.MatchServiceImpl;
 import com.example.CricketApplication.service.serviceimplementation.ScoreRecorderServiceImpl;
 import com.example.CricketApplication.service.auxilaryservices.initializematchservice.MatchRecordStatusService;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameStarter;
 import com.example.CricketApplication.service.auxilaryservices.initializematchservice.MatchFormatService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
 import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.PlayerCenturyAndHalfCenturyService;
@@ -33,66 +36,77 @@ public class AuxiliaryPlayerService {
     TeamSelectorService teamSelectorService;
     @Autowired
     ScoreRecordBuilder scoreRecordBuilder;
-
     @Autowired
     ScoreRecorderServiceImpl scoreRecorderRepositoryService;
-
     @Autowired
     PlayerStatsRecorder playerStatsRecorder;
+    @Autowired
+    private MatchRepositoryImpl matchRepositoryImpl;
 
     public static void addScoreToBatter(int runsScorePerBall) {
-        GameService.getBattingPlayer().setScore(runsScorePerBall);
-        GameService.getBattingPlayer().setBallsFaced(1);
+        GameStarter.getBattingPlayer().setScore(runsScorePerBall);
+        GameStarter.getBattingPlayer().setBallsFaced(1);
     }
 
     public static void setActiveStatusForPlayers() {
-        GameService.getBattingPlayer().setActiveStatus("active");
-        GameService.getBowlingPlayer().setActiveStatus("active");
+        GameStarter.getBattingPlayer().setActiveStatus("active");
+        GameStarter.getBowlingPlayer().setActiveStatus("active");
     }
 
     public void playingTeamPlayersProvider(long matchId) throws Exception {
-        GameService.setMatchTeams(matchRepositoryService.getMatchById(matchId));
-        GameService.setPlayingTeams(new ArrayList<>());
-        List<Team> playingTeams =  GameService.getMatchTeams().getTeamsPlayed();
-        GameService.setTempMatchId(matchId);
-        GameService.setTeams(teamSelectorService.teamSelector(
-                playingTeams.get(Constants.FIRST_TEAM).getTeamId(),
-                playingTeams.get(Constants.SECOND_TEAM).getTeamId()
-        ));
-        GameService.setPlayingTeamsPlayers(
+        GameStarter.setMatchTeams(matchRepositoryService.getMatchById(matchId));
+        GameStarter.setPlayingTeams(new ArrayList<>());
+        List<Team> playingTeams =  GameStarter.getMatchTeams().getTeamsPlayed();
+        GameStarter.setTempMatchId(matchId);
+        if (ResumeMatchService.isResumed) {
+            GameStarter.setTeams(playingTeams);
+        }
+        else {
+            GameStarter.setTeams(teamSelectorService.teamSelector(
+                    playingTeams.get(Constants.FIRST_TEAM).getTeamId(),
+                    playingTeams.get(Constants.SECOND_TEAM).getTeamId()
+            ));
+        }
+        GameStarter.setPlayingTeamsPlayers(
                 List.of(
-                        GameService.getTeams().get(Constants.FIRST_TEAM).getPlayers(),
-                        GameService.getTeams().get(Constants.SECOND_TEAM).getPlayers()
+                        GameStarter.getTeams().get(Constants.FIRST_TEAM).getPlayers(),
+                        GameStarter.getTeams().get(Constants.SECOND_TEAM).getPlayers()
                 )
         );
+    }
+
+    public void saveMatchStatus(long matchId) throws Exception {
+        GameStarter.getMatchTeams().setTeamsPlayed(GameStarter.getTeams());
+        GameStarter.getMatchTeams().setMatchFormat(MatchFormatService.getPlannedMatchFormat());
+        matchRepositoryService.updateMatch(matchId, GameStarter.getMatchTeams());
+        playerStatsRecorder.savePlayerStats(GameStarter.getPlayingTeamsPlayers());
     }
 
     public void updateStatsAndScores(long matchId) throws Exception {
-        GameService.getMatchTeams().setTeamsPlayed(GameService.getTeams());
-        GameService.getMatchTeams().setMatchFormat(MatchFormatService.getPlannedMatchFormat());
-        PlayerCenturyAndHalfCenturyService.centuryStatsProvider(GameService.getPlayingTeamsPlayers());
-        matchRepositoryService.updateMatch(matchId, GameService.getMatchTeams());
+        PlayerCenturyAndHalfCenturyService.centuryStatsProvider(GameStarter.getPlayingTeamsPlayers());
+        matchRepositoryService.updateMatch(matchId, GameStarter.getMatchTeams());
         statusService.saveMatchStatusRecord(matchId);
-        playerStatsRecorder.savePlayerStats(GameService.getPlayingTeamsPlayers());
     }
 
-    public void saveScoreRecord(int runsScorePerBall) {
-        String overCount = String.valueOf(OverService.getOverCount()) + "." + OverService.getBallsCount();
-
-        scoreRecorderRepositoryService.saveScoreRecordPerBall(
-                scoreRecordBuilder.build(
-                        GameService.getTempMatchId(),
-                        overCount,
-                        scoreBoardDisplay.runsForDisplayProvider(runsScorePerBall),
-                        GameService.getInnings(),
-                        ScoreService.getScoreOfBothTeams()[GameService.getBatting()],
-                        WicketStatusProvider.getWicketLose(),
-                        GameService.getBattingPlayer(),
-                        GameService.getBowlingPlayer()
-                )
+    public ScoreRecord buildScoreRecord(int runsScorePerBall) {
+        return scoreRecordBuilder.build(
+                GameStarter.getTempMatchId(),
+                OverService.getOverCount() + "." + OverService.getBallsCount(),
+                scoreBoardDisplay.runsForDisplayProvider(runsScorePerBall),
+                GameStarter.getInnings(),
+                ScoreService.getScoreOfBothTeams()[GameStarter.getBatting()],
+                WicketStatusProvider.getWicketLose(),
+                GameStarter.getBattingPlayer(),
+                GameStarter.getBowlingPlayer()
         );
     }
 
+    public void saveScoreRecord(ScoreRecord record) {
+        scoreRecorderRepositoryService.saveScoreRecordPerBall(record);
+    }
 
+    public void saveScoreRecords(List<ScoreRecord> records) {
+        scoreRecorderRepositoryService.saveAllRecords(records);
+    }
 
 }

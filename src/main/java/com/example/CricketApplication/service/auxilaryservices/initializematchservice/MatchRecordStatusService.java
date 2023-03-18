@@ -2,9 +2,8 @@ package com.example.CricketApplication.service.auxilaryservices.initializematchs
 
 import com.example.CricketApplication.entities.MatchStatusRecord;
 import com.example.CricketApplication.utils.SequenceGeneratorService;
-import com.example.CricketApplication.service.serviceinterfaces.MatchService;
 import com.example.CricketApplication.service.serviceinterfaces.MatchStatusService;
-import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameService;
+import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameStarter;
 import com.example.CricketApplication.service.auxilaryservices.runtrackerservice.ScoreService;
 import com.example.CricketApplication.view.ScoreBoardDisplay;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,6 @@ import java.util.Map;
 public class MatchRecordStatusService {
 
     @Autowired
-    MatchService matchService;
-
-    @Autowired
     MatchStatusService matchStatusService;
 
     @Autowired
@@ -30,8 +26,8 @@ public class MatchRecordStatusService {
 
     public void saveMatchStatusRecord(long matchId) {
         Map<Long, Integer> scoreUtilityMap = new HashMap<>() {{
-            put(GameService.getTeams().get(0).getTeamId(), ScoreService.getScoreOfBothTeams()[0]);
-            put(GameService.getTeams().get(1).getTeamId(), ScoreService.getScoreOfBothTeams()[1]);
+            put(GameStarter.getTeams().get(0).getTeamId(), ScoreService.getScoreOfBothTeams()[0]);
+            put(GameStarter.getTeams().get(1).getTeamId(), ScoreService.getScoreOfBothTeams()[1]);
         }};
 
         MatchStatusRecord matchStatusRecord = MatchStatusRecord.builder()

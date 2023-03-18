@@ -24,6 +24,11 @@ public class ScoreRecorderServiceImpl implements ScoreRecorderService {
     }
 
     @Override
+    public void saveAllRecords(List<ScoreRecord> scoreRecords) {
+        scoreRecorderRepository.saveAll(scoreRecords.stream().toList());
+    }
+
+    @Override
     public List<ScoreRecord> getStatsOnParticularBall(long matchId, String over) {
         return scoreRecorderRepository.getStatsOnParticularBall(matchId, over);
     }
@@ -32,4 +37,6 @@ public class ScoreRecorderServiceImpl implements ScoreRecorderService {
     public List<ScoreRecord> getStatsOnParticularBallAndInnings(long matchId, String over, int innings) {
         return scoreRecorderRepository.getStatsOnParticularBallAndInnings(matchId, over, innings);
     }
+
+
 }
