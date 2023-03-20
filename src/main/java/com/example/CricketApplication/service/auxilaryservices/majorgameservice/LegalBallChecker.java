@@ -8,6 +8,7 @@ import com.example.CricketApplication.service.auxilaryservices.playerservice.Aux
 import com.example.CricketApplication.utils.Constants;
 import com.example.CricketApplication.utils.builders.MatchStatusSaverBuilder;
 import com.example.CricketApplication.view.ScoreBoardDisplay;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class LegalBallChecker {
 
     @Autowired
     ScoreBoardDisplay scoreBoardDisplay;
+    @Getter
     private static List<ScoreRecord> scoreRecords = new ArrayList<>();
     @Autowired
     AuxiliaryPlayerService playerService;

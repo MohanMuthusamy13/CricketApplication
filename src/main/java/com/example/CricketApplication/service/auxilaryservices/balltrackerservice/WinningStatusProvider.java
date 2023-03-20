@@ -62,7 +62,7 @@ public class WinningStatusProvider {
 
 
     public byte checkWinningStatusNumber() {
-        if ((OverService.getOverCount() == GameStarter.getTotalOvers()) || (GameStarter.getFlagForTeamWinningIndicationOnSecondInnings().equals("Game Over"))) {
+        if ((OverService.getOverCount() == GameStarter.getTotalOvers()) || (GameStarter.getFlagForTeamWinningIndicationOnSecondInnings().equals("MATCH ENDED"))) {
             if (checkWinningTeamCondition() == Constants.FIRST_TEAM_WINNING_INDICATION) {
                 return Constants.FIRST_TEAM_WINNING_INDICATION;
             }
@@ -76,18 +76,17 @@ public class WinningStatusProvider {
     public void checkWinningStatus() {
         if (checkWinningStatusNumber() == Constants.FIRST_TEAM_WINNING_INDICATION) {
             System.out.println(diffProvider(1));
-            System.out.print("""
+            System.out.printf("""
                             The Game is over :)
-                            Team 1 Wins
-                            """);
+                            %s won the match
+                            """, GameStarter.getTeams().get(0).getTeamName());
             diffProvider(1);
         } else if (checkWinningStatusNumber() == Constants.SECOND_TEAM_WINNING_INDICATION) {
             System.out.println(diffProvider(2));
-            System.out.print("""
+            System.out.printf("""
                             The Game is over :)
-                            Team 2 Wins
-                            """
-                    );
+                            %s won the match
+                            """, GameStarter.getTeams().get(1).getTeamName());
             diffProvider(2);
         }
         else {

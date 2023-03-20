@@ -1,47 +1,44 @@
 package com.example.CricketApplication.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
-@NoArgsConstructor
+@Getter
+@EqualsAndHashCode
 @AllArgsConstructor
 @Builder
 @Document(collection = "matchStatusSaver")
-public class MatchStateSaver {
+public final class MatchStateSaver {
 
     @Transient
     public static final String SEQUENCE_NAME = "match_status_saver_sequence";
 
     @Id
-    private long id;
+    private final long id;
 
-    private long matchId;
+    private final long matchId;
 
-    private int overCount;
+    private final int overCount;
 
-    private int ballCount;
+    private final int ballCount;
 
-    private int innings;
+    private final int innings;
 
-    private int wicketsLose;
+    private final int wicketsLose;
 
-    private int[] score = new int[2];
+    private final int[] score;
 
-    private int totalOvers;
+    private final int totalOvers;
 
-    private String matchFormat;
+    private final String matchFormat;
 
-    private int batting;
+    private final int batting;
 
-    private int bowling;
+    private final int bowling;
 
-    private int currentBatter;
+    private final int currentBatter;
 
-    private int currentBowler;
+    private final int currentBowler;
 }

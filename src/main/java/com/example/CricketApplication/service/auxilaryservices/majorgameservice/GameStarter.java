@@ -54,8 +54,8 @@ public class GameStarter {
     @Getter @Setter
     private static Match matchTeams;
     private final TeamRepository teamRepository;
-
-    private List<ScoreRecord> scoreRecords = new ArrayList<>();
+    @Setter
+    private static List<ScoreRecord> scoreRecords = new ArrayList<>();
     @Autowired
     private GamePlay gamePlay;
     @Autowired
@@ -141,7 +141,7 @@ public class GameStarter {
         auxiliaryPlayerService.saveMatchStatus(matchId);
         auxiliaryPlayerService.updateStatsAndScores(matchId);
         if (type.equals("MATCH AT A TIME")) {
-            auxiliaryPlayerService.saveScoreRecords(scoreRecords);
+            auxiliaryPlayerService.saveScoreRecords(LegalBallChecker.getScoreRecords());
         }
         ResetGameService.resetGame();
     }

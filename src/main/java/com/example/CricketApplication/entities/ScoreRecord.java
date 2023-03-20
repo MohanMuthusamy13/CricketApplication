@@ -1,39 +1,36 @@
 package com.example.CricketApplication.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
+@Getter
+@EqualsAndHashCode
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Document(collection = "score_recorder")
-public class ScoreRecord {
+public final class ScoreRecord {
 
     @Transient
     public static final String SEQUENCE_NAME = "score_recorder_seq";
 
     @Id
-    private long ballId;
+    private final long ballId;
 
-    private long matchId;
+    private final long matchId;
 
-    private String overCount;
+    private final String overCount;
 
-    private String ballOutcome;
+    private final String ballOutcome;
 
-    private int innings;
+    private final int innings;
 
-    private int totalRunsScoredByBattingTeam;
+    private final int totalRunsScoredByBattingTeam;
 
-    private int totalWicketsDown;
+    private final int totalWicketsDown;
 
-    private Player batsman;
+    private final Player batsman;
 
-    private Player bowler;
+    private final Player bowler;
 }
