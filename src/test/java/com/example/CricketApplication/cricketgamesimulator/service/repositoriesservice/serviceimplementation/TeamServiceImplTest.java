@@ -3,7 +3,7 @@ package com.example.CricketApplication.cricketgamesimulator.service.repositories
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.entities.Team;
 import com.example.CricketApplication.exceptionhandler.NotFoundException;
-import com.example.CricketApplication.repositories.repositoryImpl.TeamRepository;
+import com.example.CricketApplication.repositories.TeamRepository;
 import com.example.CricketApplication.service.serviceimplementation.TeamServiceImpl;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -2,7 +2,7 @@ package com.example.CricketApplication.service.auxilaryservices.majorgameservice
 
 import com.example.CricketApplication.entities.Match;
 import com.example.CricketApplication.entities.MatchStateSaver;
-import com.example.CricketApplication.repositories.repositoryImpl.MatchStatusSaverRepositoryImpl;
+import com.example.CricketApplication.repositories.MatchStatusSaverRepository;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WicketStatusProvider;
 import com.example.CricketApplication.service.auxilaryservices.playerservice.AuxiliaryPlayerService;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ResumeMatchService {
 
     @Autowired
-    private MatchStatusSaverRepositoryImpl saverRepository;
+    private MatchStatusSaverRepository saverRepository;
 
     @Autowired
     AuxiliaryPlayerService auxiliaryPlayerService;

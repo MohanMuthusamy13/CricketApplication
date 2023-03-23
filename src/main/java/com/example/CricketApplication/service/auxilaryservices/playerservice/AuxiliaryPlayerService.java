@@ -2,7 +2,7 @@ package com.example.CricketApplication.service.auxilaryservices.playerservice;
 
 import com.example.CricketApplication.entities.ScoreRecord;
 import com.example.CricketApplication.entities.Team;
-import com.example.CricketApplication.repositories.repositoryImpl.MatchRepositoryImpl;
+import com.example.CricketApplication.repositories.MatchRepository;
 import com.example.CricketApplication.service.auxilaryservices.majorgameservice.ResumeMatchService;
 import com.example.CricketApplication.service.serviceimplementation.MatchServiceImpl;
 import com.example.CricketApplication.service.serviceimplementation.ScoreRecorderServiceImpl;
@@ -41,7 +41,7 @@ public class AuxiliaryPlayerService {
     @Autowired
     PlayerStatsRecorder playerStatsRecorder;
     @Autowired
-    private MatchRepositoryImpl matchRepositoryImpl;
+    private MatchRepository matchRepositoryImpl;
 
     public static void addScoreToBatter(int runsScorePerBall) {
         GameStarter.getBattingPlayer().setScore(runsScorePerBall);

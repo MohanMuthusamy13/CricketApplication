@@ -2,7 +2,7 @@ package com.example.CricketApplication.service.serviceimplementation;
 
 import com.example.CricketApplication.entities.Team;
 import com.example.CricketApplication.exceptionhandler.NotFoundException;
-import com.example.CricketApplication.repositories.repositoryImpl.TeamRepository;
+import com.example.CricketApplication.repositories.TeamRepository;
 import com.example.CricketApplication.service.serviceinterfaces.TeamService;
 import com.example.CricketApplication.utils.builders.TeamBuilder;
 import org.springframework.beans.factory.annotation.Autowired;

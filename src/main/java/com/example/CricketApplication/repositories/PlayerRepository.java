@@ -1,7 +1,6 @@
-package com.example.CricketApplication.repositories.repositoryImpl;
+package com.example.CricketApplication.repositories;
 
 import com.example.CricketApplication.entities.Player;
-import com.example.CricketApplication.repositories.repository.PlayerRepository;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PlayerRepositoryImpl extends MongoRepository<Player, Long>, PlayerRepository {
+public interface PlayerRepository extends MongoRepository<Player, Long> {
 
     @Aggregation(pipeline = {
             "{'$sort' : {score : -1}}",

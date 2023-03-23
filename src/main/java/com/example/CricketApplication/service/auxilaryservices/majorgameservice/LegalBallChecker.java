@@ -1,7 +1,7 @@
 package com.example.CricketApplication.service.auxilaryservices.majorgameservice;
 
 import com.example.CricketApplication.entities.ScoreRecord;
-import com.example.CricketApplication.repositories.repositoryImpl.MatchStatusSaverRepositoryImpl;
+import com.example.CricketApplication.repositories.MatchStatusSaverRepository;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WinningStatusProvider;
 import com.example.CricketApplication.service.auxilaryservices.playerservice.AuxiliaryPlayerService;
@@ -25,7 +25,7 @@ public class LegalBallChecker {
     @Autowired
     AuxiliaryPlayerService playerService;
     @Autowired
-    MatchStatusSaverRepositoryImpl saverRepository;
+    MatchStatusSaverRepository saverRepository;
     WinningStatusProvider checkWinning = new WinningStatusProvider();
     @Autowired
     MatchStatusSaverBuilder matchStatusSaverBuilder;

@@ -1,7 +1,6 @@
-package com.example.CricketApplication.repositories.repositoryImpl;
+package com.example.CricketApplication.repositories;
 
 import com.example.CricketApplication.entities.MatchStatusRecord;
-import com.example.CricketApplication.repositories.repository.MatchStatusRepository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MatchStatusRepositoryImpl extends MongoRepository<MatchStatusRecord, Long>, MatchStatusRepository {
+public interface MatchStatusRepository extends MongoRepository<MatchStatusRecord, Long> {
 
     @Query(value = "{matchId : ?0}")
     Optional<MatchStatusRecord> getMatchRecordByMatchId(long matchId);

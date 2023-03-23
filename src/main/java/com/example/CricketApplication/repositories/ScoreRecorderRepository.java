@@ -1,7 +1,6 @@
-package com.example.CricketApplication.repositories.repositoryImpl;
+package com.example.CricketApplication.repositories;
 
 import com.example.CricketApplication.entities.ScoreRecord;
-import com.example.CricketApplication.repositories.repository.ScoreRecorderRepository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ScoreRecorderRepositoryImpl extends MongoRepository<ScoreRecord, Long>, ScoreRecorderRepository {
+public interface ScoreRecorderRepository extends MongoRepository<ScoreRecord, Long> {
 
     @Query(value = "{\"matchId\" : ?0, \"overCount\" : \"?1\"}}")
     List<ScoreRecord> getStatsOnParticularBall(long matchId, String over);

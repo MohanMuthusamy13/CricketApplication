@@ -2,7 +2,7 @@ package com.example.CricketApplication.cricketgamesimulator.service.repositories
 
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.exceptionhandler.NotFoundException;
-import com.example.CricketApplication.repositories.repositoryImpl.PlayerRepositoryImpl;
+import com.example.CricketApplication.repositories.PlayerRepository;
 import com.example.CricketApplication.service.serviceimplementation.PlayerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerServiceImplTest {
 
     @Mock
-    private PlayerRepositoryImpl playerRepository;
+    private PlayerRepository playerRepository;
 
     @InjectMocks
     private PlayerServiceImpl playerServiceUnderTest;

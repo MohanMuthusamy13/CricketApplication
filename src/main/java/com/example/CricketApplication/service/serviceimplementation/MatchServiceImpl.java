@@ -2,7 +2,7 @@ package com.example.CricketApplication.service.serviceimplementation;
 
 import com.example.CricketApplication.entities.Match;
 import com.example.CricketApplication.exceptionhandler.NotFoundException;
-import com.example.CricketApplication.repositories.repositoryImpl.MatchRepositoryImpl;
+import com.example.CricketApplication.repositories.MatchRepository;
 import com.example.CricketApplication.service.serviceinterfaces.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import java.util.List;
 @Service
 public class MatchServiceImpl implements MatchService {
 
-    private final MatchRepositoryImpl matchRepository;
+    private final MatchRepository matchRepository;
 
     @Autowired
-    public MatchServiceImpl(MatchRepositoryImpl matchRepository) {
+    public MatchServiceImpl(MatchRepository matchRepository) {
         this.matchRepository = matchRepository;
     }
 

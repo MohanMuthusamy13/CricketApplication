@@ -1,8 +1,8 @@
 package com.example.CricketApplication.service.auxilaryservices.majorgameservice;
 
 import com.example.CricketApplication.entities.*;
-import com.example.CricketApplication.repositories.repositoryImpl.MatchRepositoryImpl;
-import com.example.CricketApplication.repositories.repositoryImpl.TeamRepository;
+import com.example.CricketApplication.repositories.MatchRepository;
+import com.example.CricketApplication.repositories.TeamRepository;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
 import com.example.CricketApplication.service.auxilaryservices.playerservice.AuxiliaryPlayerService;
 import com.example.CricketApplication.service.auxilaryservices.initializematchservice.ResetGameService;
@@ -15,11 +15,15 @@ import com.example.CricketApplication.view.ScoreBoardDisplay;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
+@Slf4j
 @Data
 @Service
 public class GameStarter {
@@ -65,10 +69,10 @@ public class GameStarter {
     @Autowired
     ScoreBoardDisplay scoreBoardDisplay;
     WinningStatusProvider checkWinning = new WinningStatusProvider();
-    private final MatchRepositoryImpl matchRepositoryImpl;
+    private final MatchRepository matchRepositoryImpl;
 
     public GameStarter(TeamRepository teamRepository,
-                       MatchRepositoryImpl matchRepositoryImpl) {
+                       MatchRepository matchRepositoryImpl) {
         gameServiceProvider();
         this.teamRepository = teamRepository;
         this.matchRepositoryImpl = matchRepositoryImpl;
@@ -113,6 +117,7 @@ public class GameStarter {
     }
 
     public void startGame(long matchId, String type) throws Exception {
+        log.debug("Thread id {}", Thread.currentThread().getName());
         if (!ResumeMatchService.isResumed) {
             auxiliaryPlayerService.playingTeamPlayersProvider(matchId);
             TossService.startTossing();

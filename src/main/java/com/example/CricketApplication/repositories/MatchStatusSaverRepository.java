@@ -1,9 +1,9 @@
-package com.example.CricketApplication.repositories.repositoryImpl;
+package com.example.CricketApplication.repositories;
 
 import com.example.CricketApplication.entities.MatchStateSaver;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MatchStatusSaverRepositoryImpl extends MongoRepository<MatchStateSaver, Long> {
+public interface MatchStatusSaverRepository extends MongoRepository<MatchStateSaver, Long> {
 }

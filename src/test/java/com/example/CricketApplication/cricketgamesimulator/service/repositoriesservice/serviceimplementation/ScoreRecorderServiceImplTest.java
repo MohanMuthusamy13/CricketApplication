@@ -2,7 +2,7 @@ package com.example.CricketApplication.cricketgamesimulator.service.repositories
 
 import com.example.CricketApplication.entities.Player;
 import com.example.CricketApplication.entities.ScoreRecord;
-import com.example.CricketApplication.repositories.repositoryImpl.ScoreRecorderRepositoryImpl;
+import com.example.CricketApplication.repositories.ScoreRecorderRepository;
 import com.example.CricketApplication.service.serviceimplementation.ScoreRecorderServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class ScoreRecorderServiceImplTest {
     @Mock
-    private ScoreRecorderRepositoryImpl scoreRecorderRepository;
+    private ScoreRecorderRepository scoreRecorderRepository;
 
     @InjectMocks
     private ScoreRecorderServiceImpl service;

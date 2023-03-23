@@ -1,4 +1,4 @@
-package com.example.CricketApplication.repositories.repositoryImpl;
+package com.example.CricketApplication.repositories;
 
 import com.example.CricketApplication.entities.Team;
 import org.springframework.data.mongodb.repository.MongoRepository;

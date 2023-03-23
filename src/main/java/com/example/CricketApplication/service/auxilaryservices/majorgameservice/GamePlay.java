@@ -35,6 +35,8 @@ public class GamePlay {
     }
 
     public void startBattingAndBowling(String type) throws Exception {
+        System.out.println("\n\n\n" + Thread.currentThread().getName()+"\n\n\n\n\n\n");
+
         runsScorePerBall = runsGenerator
                 .runsGeneratorByAbility(GameStarter.getBattingPlayer().getBaseAbility());
         matchType = type;
