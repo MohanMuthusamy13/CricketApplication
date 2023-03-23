@@ -26,9 +26,9 @@ import static com.example.CricketApplication.utils.Constants.*;
 public class GameStarter {
 
     @Getter @Setter
-    private static List playingTeamsPlayers;
+    private static List<List<Player>> playingTeamsPlayers = new ArrayList<>();
     @Getter @Setter
-    private static List playingTeams;
+    private static List<Team> playingTeams = new ArrayList<>();
     @Getter
     private static int currentBatter;
     @Getter
@@ -83,11 +83,11 @@ public class GameStarter {
     }
 
     public static Player getBattingPlayer() {
-        return ((ArrayList<Player>) playingTeamsPlayers.get(battingTeamIndicator)).get(currentBatter);
+        return (playingTeamsPlayers.get(battingTeamIndicator)).get(currentBatter);
     }
 
     public static Player getBowlingPlayer() {
-        return ((ArrayList<Player>) playingTeamsPlayers.get(Math.abs(1 - battingTeamIndicator))).get(currentBowler);
+        return (playingTeamsPlayers.get(Math.abs(1 - battingTeamIndicator))).get(currentBowler);
     }
 
     public static void setCurrentBatter(int currentBatter) {
