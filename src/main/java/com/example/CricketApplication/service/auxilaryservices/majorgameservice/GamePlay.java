@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import static com.example.CricketApplication.utils.Constants.*;
 
 @Service
 public class GamePlay {
@@ -35,34 +36,33 @@ public class GamePlay {
     }
 
     public void startBattingAndBowling(String type) throws Exception {
-        System.out.println("\n\n\n" + Thread.currentThread().getName()+"\n\n\n\n\n\n");
 
         runsScorePerBall = runsGenerator
                 .runsGeneratorByAbility(GameStarter.getBattingPlayer().getBaseAbility());
         matchType = type;
 
         switch (runsScorePerBall) {
-            case Constants.WICKET:
+            case WICKET:
                 wicketTracker.gotWicket();
                 GamePlay.setLegalBallFlag(true);
                 break;
-            case Constants.WIDE:
+            case WIDE:
                 IllegalBallTrackerService.wideTracker();
                 GamePlay.setLegalBallFlag(false);
                 break;
-            case Constants.NO_BALL:
+            case NO_BALL:
                 IllegalBallTrackerService.noBallTracker();
                 GamePlay.setLegalBallFlag(false);
                 break;
-            case Constants.DOT_BALL, Constants.ONE_RUN,
-                    Constants.TWO_RUNS, Constants.THREE_RUNS, Constants.FIVE_RUNS:
+            case DOT_BALL, ONE_RUN,
+                    TWO_RUNS, THREE_RUNS, FIVE_RUNS:
                 scoreAccumulator(GameStarter.getBattingTeamIndicator(), runsScorePerBall);
                 break;
-            case Constants.BOUNDARY:
+            case BOUNDARY:
                 GameStarter.getBattingPlayer().setNoOfFours(1);
                 scoreAccumulator(GameStarter.getBattingTeamIndicator(), runsScorePerBall);
                 break;
-            case Constants.SIX:
+            case SIX:
                 GameStarter.getBattingPlayer().setNoOfSixes(1);
                 scoreAccumulator(GameStarter.getBattingTeamIndicator(), runsScorePerBall);
                 break;

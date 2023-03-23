@@ -5,15 +5,14 @@ import com.example.CricketApplication.repositories.MatchStatusSaverRepository;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.OverService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WinningStatusProvider;
 import com.example.CricketApplication.service.auxilaryservices.playerservice.AuxiliaryPlayerService;
-import com.example.CricketApplication.utils.Constants;
 import com.example.CricketApplication.utils.builders.MatchStatusSaverBuilder;
 import com.example.CricketApplication.view.ScoreBoardDisplay;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
+import static com.example.CricketApplication.utils.Constants.SECOND_INNINGS;
 
 @Service
 public class LegalBallChecker {
@@ -45,7 +44,7 @@ public class LegalBallChecker {
                 OverService.IncreaseBallCount();
         }
 
-        if (GameStarter.getInnings() == Constants.SECOND_INNINGS &&
+        if (GameStarter.getInnings() == SECOND_INNINGS &&
                 !checkWinning.checkWinningStatusForSecondInnings().equals("")) {
             GameStarter.setFlagForTeamWinningIndicationOnSecondInnings("MATCH ENDED");
         }

@@ -1,5 +1,6 @@
 package com.example.CricketApplication.service.auxilaryservices.majorgameservice;
 
+import java.util.*;
 import com.example.CricketApplication.entities.*;
 import com.example.CricketApplication.repositories.MatchRepository;
 import com.example.CricketApplication.repositories.TeamRepository;
@@ -10,18 +11,14 @@ import com.example.CricketApplication.service.auxilaryservices.runtrackerservice
 import com.example.CricketApplication.service.auxilaryservices.initializematchservice.TossService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WicketStatusProvider;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WinningStatusProvider;
-import com.example.CricketApplication.utils.Constants;
 import com.example.CricketApplication.view.ScoreBoardDisplay;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
+import static com.example.CricketApplication.utils.Constants.*;
 
 @Slf4j
 @Data
@@ -35,7 +32,7 @@ public class GameStarter {
     @Getter
     private static int currentBatter;
     @Getter
-    private static int currentBowler = Constants.FIRST_BOWLER_IN_TEAM;
+    private static int currentBowler = FIRST_BOWLER_IN_TEAM;
     @Getter @Setter
     private static int[] scoreTeams = new int[2];
     @Getter @Setter
@@ -82,7 +79,7 @@ public class GameStarter {
         ScoreService.setScoreOfBothTeams(new int[2]);
         GameStarter.scoreTeams = ScoreService.getScoreOfBothTeams();
         GameStarter.wickets = WicketStatusProvider.getWicketLose();
-        GameStarter.innings = Constants.FIRST_INNINGS;
+        GameStarter.innings = FIRST_INNINGS;
     }
 
     public static Player getBattingPlayer() {
@@ -104,11 +101,11 @@ public class GameStarter {
     }
 
     public static void setNextBowler() {
-        if (currentBowler < Constants.LAST_BOWLER_IN_TEAM) {
+        if (currentBowler < LAST_BOWLER_IN_TEAM) {
             currentBowler += 1;
         }
         else {
-            setCurrentBowler(Constants.FIRST_BOWLER_IN_TEAM);
+            setCurrentBowler(FIRST_BOWLER_IN_TEAM);
         }
     }
 
@@ -125,14 +122,14 @@ public class GameStarter {
         tempMatchId = matchId;
         AuxiliaryPlayerService.setActiveStatusForPlayers();
 
-        while (innings <= Constants.SECOND_INNINGS) {
-            if ((WicketStatusProvider.getWicketLose() > Constants.LAST_WICKET || OverService.getOverCount() == totalOvers)
-                    && innings == Constants.FIRST_INNINGS) {
+        while (innings <= SECOND_INNINGS) {
+            if ((WicketStatusProvider.getWicketLose() > LAST_WICKET || OverService.getOverCount() == totalOvers)
+                    && innings == FIRST_INNINGS) {
                 wicketTracker.startSecondInnings();
             }
-            else if ((innings == Constants.SECOND_INNINGS && (OverService.getOverCount() == totalOvers)) ||
+            else if ((innings == SECOND_INNINGS && (OverService.getOverCount() == totalOvers)) ||
                     ((GameStarter.flagForTeamWinningIndicationOnSecondInnings).equals("MATCH ENDED")) ||
-                    (WicketStatusProvider.getWicketLose() >= Constants.LAST_WICKET
+                    (WicketStatusProvider.getWicketLose() >= LAST_WICKET
                             && WicketStatusProvider.isAllWicketsDownInSecondInnings())){
                 scoreBoardDisplay.showScoreOfBothTeams();
                 checkWinning.checkWinningStatus();

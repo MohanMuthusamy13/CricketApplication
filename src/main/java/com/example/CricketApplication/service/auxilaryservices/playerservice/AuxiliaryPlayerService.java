@@ -15,13 +15,12 @@ import com.example.CricketApplication.service.auxilaryservices.runtrackerservice
 import com.example.CricketApplication.service.auxilaryservices.majorgameservice.TeamSelectorService;
 import com.example.CricketApplication.service.auxilaryservices.balltrackerservice.WicketStatusProvider;
 import com.example.CricketApplication.utils.builders.ScoreRecordBuilder;
-import com.example.CricketApplication.utils.Constants;
 import com.example.CricketApplication.view.ScoreBoardDisplay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
+import static com.example.CricketApplication.utils.Constants.*;
 
 @Service
 public class AuxiliaryPlayerService {
@@ -63,14 +62,14 @@ public class AuxiliaryPlayerService {
         }
         else {
             GameStarter.setTeams(teamSelectorService.teamSelector(
-                    playingTeams.get(Constants.FIRST_TEAM).getTeamId(),
-                    playingTeams.get(Constants.SECOND_TEAM).getTeamId()
+                    playingTeams.get(FIRST_TEAM).getTeamId(),
+                    playingTeams.get(SECOND_TEAM).getTeamId()
             ));
         }
         GameStarter.setPlayingTeamsPlayers(
                 List.of(
-                        GameStarter.getTeams().get(Constants.FIRST_TEAM).getPlayers(),
-                        GameStarter.getTeams().get(Constants.SECOND_TEAM).getPlayers()
+                        GameStarter.getTeams().get(FIRST_TEAM).getPlayers(),
+                        GameStarter.getTeams().get(SECOND_TEAM).getPlayers()
                 )
         );
     }

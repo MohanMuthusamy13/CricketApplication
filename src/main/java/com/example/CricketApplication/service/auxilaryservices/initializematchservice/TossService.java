@@ -5,6 +5,7 @@ import com.example.CricketApplication.enums.Toss;
 import com.example.CricketApplication.service.auxilaryservices.majorgameservice.GameStarter;
 import com.example.CricketApplication.utils.Constants;
 import com.example.CricketApplication.view.TossDisplay;
+import static com.example.CricketApplication.utils.Constants.*;
 
 public class TossService {
 
@@ -21,12 +22,12 @@ public class TossService {
         int teamSelected = tossWinner.getBattingOrderIndicator();
         TossDisplay.tossDisplayed(teamSelected);
         if (teamSelected == 0) {
-            GameStarter.setBattingTeamIndicator(Constants.SECOND_TEAM);
-            GameStarter.setBowlingTeamIndicator(Constants.FIRST_TEAM);
+            GameStarter.setBattingTeamIndicator(SECOND_TEAM);
+            GameStarter.setBowlingTeamIndicator(FIRST_TEAM);
         }
         else {
-            GameStarter.setBattingTeamIndicator(Constants.FIRST_TEAM);
-            GameStarter.setBowlingTeamIndicator(Constants.SECOND_TEAM);
+            GameStarter.setBattingTeamIndicator(FIRST_TEAM);
+            GameStarter.setBowlingTeamIndicator(SECOND_TEAM);
         }
     }
 }
